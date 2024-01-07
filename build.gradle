@@ -71,7 +71,7 @@ tasks.named('test') {
 
 
 
-//// 배포 관련
-//jar {
-//	enabled=false
-//}
+// 배포 관련
+jar {
+	enabled=false
+}
