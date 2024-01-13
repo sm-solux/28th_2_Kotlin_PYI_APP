@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+
+
 // 1
 
 // Domain Model
@@ -82,6 +84,13 @@ public class Star {
         this.star = star;
     }
 
-
+    // 별점 수정
+    public void update(BigDecimal star) {
+        this.star = star;
+    }
 
 }
+
+// Memos 클래스 생성이 끝났다면,
+// Memos 클래스로 Database를 접근하게 해줄 JpaRepository를 생성한다.
+// MemosRepository 생성

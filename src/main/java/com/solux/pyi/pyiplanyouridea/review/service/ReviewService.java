@@ -59,7 +59,7 @@ public class ReviewService {
     @Transactional
     public ReviewResponseDto findById(Long reviewId) {
         Review entity = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 퀵메모가 없습니다. reviewId = " + reviewId));
+                .orElseThrow(() -> new IllegalArgumentException("해당 결과물 기록 및 평가가 없습니다. reviewId = " + reviewId));
 
         return new ReviewResponseDto(entity);
     }
@@ -82,7 +82,7 @@ public class ReviewService {
         // Update 쿼리를 날릴 필요가 없다는 것이다.
         // 이 개념을 더티 체킹(dirty checking)이라고 한다.
         Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 퀵메모가 없습니다. reviewId = " + reviewId));
+                .orElseThrow(() -> new IllegalArgumentException("해당 결과물 기록 및 평가가 없습니다. reviewId = " + reviewId));
 
         review.update(requestDto.getReviewTitle(), requestDto.getReview());
 
@@ -93,7 +93,7 @@ public class ReviewService {
     @Transactional
     public void delete(Long reviewId) {
         Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 퀵메모가 없습니다. reviewId = " + reviewId));
+                .orElseThrow(() -> new IllegalArgumentException("해당 결과물 기록 및 평가가 없습니다. reviewId = " + reviewId));
 
         reviewRepository.delete(review);
         // - JpaRepository에서 이미 delete 메소드를 지원하고 있으니 이를 활용한다.
