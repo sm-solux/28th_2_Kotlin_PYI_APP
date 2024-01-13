@@ -49,13 +49,13 @@ public class ReviewService {
 
     private final ReviewRepository reviewRepository;
 
-    // 결과물 기록 및 평가 저장
+    // 결과물 기록 및 평가 하나 저장
     @Transactional
     public Long save(Memos memoId, ReviewSaveRequestDto requestDto) {
         return reviewRepository.save(requestDto.toEntity(memoId)).getReviewId();
     }
 
-    // 결과물 기록 및 평가 조회
+    // 결과물 기록 및 평가 하나 조회
     @Transactional
     public ReviewResponseDto findById(Long reviewId) {
         Review entity = reviewRepository.findById(reviewId)
@@ -64,23 +64,23 @@ public class ReviewService {
         return new ReviewResponseDto(entity);
     }
 
-    // 결과물 기록 및 평가 수정
+    // 결과물 기록 및 평가 하나 수정
     @Transactional
     public Long update(Long reviewId, ReviewUpdateRequestDto requestDto) {
-        // update 기능에서 데이터베이스에 쿼리를 날리는 부분이 없다.
-        // 이것이 가능한 이유는 JPA의 영속성 컨텍스트 때문이다.
-        // 영속성 컨텍스트란, 엔티티를 영구 저장하는 환경이다.
-        // 일종의 논리적 개념이라고 보면 되며, JPA의 핵심 내용은
-        // 엔티티가 영속성 컨텍스트에 포함되어 있냐 아니냐로 갈린다.
-        // JPA의 엔티티 매니저(EntityManager)가 활성화된 상태로
-        // (Spring Data Jpa를 쓴다면 기본 옵션)
-        // 트랜잭션 안에서 데이터베이스에서 데이터를 가져오면
-        // 이 데이터는 영속성 컨텍스트가 유지된 상태이다.
-        // 이 상태에서 해당 데이터의 값을 변경하면
-        // 트랜잭션이 끝나는 시점에 해당 테이블에 변경분을 반영한다.
-        // 즉, Entity 객체의 값만 변경하면 별도로
-        // Update 쿼리를 날릴 필요가 없다는 것이다.
-        // 이 개념을 더티 체킹(dirty checking)이라고 한다.
+    // update 기능에서 데이터베이스에 쿼리를 날리는 부분이 없다.
+    // 이것이 가능한 이유는 JPA의 영속성 컨텍스트 때문이다.
+    // 영속성 컨텍스트란, 엔티티를 영구 저장하는 환경이다.
+    // 일종의 논리적 개념이라고 보면 되며, JPA의 핵심 내용은
+    // 엔티티가 영속성 컨텍스트에 포함되어 있냐 아니냐로 갈린다.
+    // JPA의 엔티티 매니저(EntityManager)가 활성화된 상태로
+    // (Spring Data Jpa를 쓴다면 기본 옵션)
+    // 트랜잭션 안에서 데이터베이스에서 데이터를 가져오면
+    // 이 데이터는 영속성 컨텍스트가 유지된 상태이다.
+    // 이 상태에서 해당 데이터의 값을 변경하면
+    // 트랜잭션이 끝나는 시점에 해당 테이블에 변경분을 반영한다.
+    // 즉, Entity 객체의 값만 변경하면 별도로
+    // Update 쿼리를 날릴 필요가 없다는 것이다.
+    // 이 개념을 더티 체킹(dirty checking)이라고 한다.
         Review review = reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 결과물 기록 및 평가가 없습니다. reviewId = " + reviewId));
 
@@ -89,7 +89,7 @@ public class ReviewService {
         return reviewId;
     }
 
-    // 결과물 기록 및 평가 삭제
+    // 결과물 기록 및 평가 하나 삭제
     @Transactional
     public void delete(Long reviewId) {
         Review review = reviewRepository.findById(reviewId)

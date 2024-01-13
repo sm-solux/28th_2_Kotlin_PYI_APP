@@ -82,12 +82,24 @@ public class Todos {
     // @Builder
     // - 해당 클래스의 빌더 패턴 클래스를 생성
     // - 생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
+    // 생성자나 빌더나 생성 시점에 값을 채워주는 역할은 똑같다.
+    // 다만, 생성자의 경우 지금 채워야 할 필드가 무엇인지 명확히 지정할 수가 없다.
+    // 생성자에서는 매개변수의 위치를 변경해도 코드를 실행하기 전까지는 문제를 찾을 수 없다.
+    // 하지만 빌더를 사용하게 되면 어느 필드에 어떤 값을 채워야 할지 명확하게 인지할 수 있다.
     public Todos(Memos memoId, LocalDateTime todoDate, String todo) {
         this.memoId = memoId;
         this.todoDate = todoDate;
         this.todo = todo;
     }
 
-
+    // 할 일 수정
+    public void update(LocalDateTime todoDate, String todo) {
+        this.todoDate = todoDate;
+        this.todo = todo;
+    }
 
 }
+
+// Memos 클래스 생성이 끝났다면,
+// Memos 클래스로 Database를 접근하게 해줄 JpaRepository를 생성한다.
+// MemosRepository 생성

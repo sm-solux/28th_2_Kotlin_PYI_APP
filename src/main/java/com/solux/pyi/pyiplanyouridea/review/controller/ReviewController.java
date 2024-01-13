@@ -47,26 +47,26 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final MemosRepository memosRepository;
 
-    // 결과물 기록 및 평가 저장
+    // 결과물 기록 및 평가 하나 저장
     @PostMapping("/createreview/{memoId}")
     public Long save(@PathVariable Long memoId, @RequestBody ReviewSaveRequestDto requestDto) {
         Memos memos = memosRepository.getReferenceById(memoId);
         return reviewService.save(memos, requestDto);
     }
 
-    // 결과물 기록 및 평가 조회
+    // 결과물 기록 및 평가 하나 조회
     @GetMapping("/viewreview/{reviewId}")
     public ReviewResponseDto findById(@PathVariable Long reviewId) {
         return reviewService.findById(reviewId);
     }
 
-    // 결과물 기록 및 평가 수정
+    // 결과물 기록 및 평가 하나 수정
     @PutMapping("/editreview/{reviewId}")
     public Long update(@PathVariable Long reviewId, @RequestBody ReviewUpdateRequestDto requestDto) {
         return reviewService.update(reviewId, requestDto);
     }
 
-    // 결과물 기록 및 평가 삭제
+    // 결과물 기록 및 평가 하나 삭제
     @DeleteMapping("/deletereview/{reviewId}")
     public Long delete(@PathVariable Long reviewId) {
         reviewService.delete(reviewId);
