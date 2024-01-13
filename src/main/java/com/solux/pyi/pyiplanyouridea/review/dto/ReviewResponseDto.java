@@ -1,8 +1,10 @@
-package com.solux.pyi.pyiplanyouridea.memos.dto;
+package com.solux.pyi.pyiplanyouridea.review.dto;
 
-import lombok.Builder;
+import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
+import com.solux.pyi.pyiplanyouridea.review.domain.Review;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+
+
 
 // Request 요청을 받을 Dto
 
@@ -33,28 +35,26 @@ import lombok.NoArgsConstructor;
 // Entity 클래스만으로 표현하기가 어려운 경우가 많다.
 // 꼭 Entity 클래스와 Controller에서 쓸 Dto는 분리해서 사용해야 한다.
 
-// 퀵메모 수정
+
+
+// 결과물 기록 및 평가 조회
 @Getter
 // - 클래스 내 모든 필드의 Getter 메소드를 자동생성
-@NoArgsConstructor
-// - 기본 생성자 자동 추가
-// - public Memos() {} 와 같은 효과
-public class MemosUpdateRequestDto {
-    //private Folders folderId;
-    private String memoTitle;
-    private String memoDetails;
+public class ReviewResponseDto {
+// Entity의 필드 중 일부만 사용할 경우
+// 생성자로 Entity를 받아 필드에 값을 넣는다.
+// 해당 경우 굳이 모든 필드를 가진 생성자(@NoArgsConstructor)가
+// 필요하진 않으므로 Dto는 Entity를 받아 처리한다.
 
-    @Builder
-    // - 해당 클래스의 빌더 패턴 클래스를 생성
-    // - 생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
-    // 생성자나 빌더나 생성 시점에 값을 채워주는 역할은 똑같다.
-    // 다만, 생성자의 경우 지금 채워야 할 필드가 무엇인지 명확히 지정할 수가 없다.
-    // 생성자에서는 매개변수의 위치를 변경해도 코드를 실행하기 전까지는 문제를 찾을 수 없다.
-    // 하지만 빌더를 사용하게 되면 어느 필드에 어떤 값을 채워야 할지 명확하게 인지할 수 있다.
-    //public MemosUpdateRequestDto(Folders folderId, String memoTitle, String memoDetails) {
-    public MemosUpdateRequestDto(String memoTitle, String memoDetails) {
-        //this.folderId = folderId;
-        this.memoTitle = memoTitle;
-        this.memoDetails = memoDetails;
+    private Long reviewId;
+    private Memos memoId;
+    private String reviewTitle;
+    private String review;
+
+    public ReviewResponseDto(Review entity) {
+        this.reviewId = entity.getReviewId();
+        this.memoId = entity.getMemoId();
+        this.reviewTitle = entity.getReviewTitle();
+        this.review = entity.getReview();
     }
 }

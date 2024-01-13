@@ -1,7 +1,6 @@
 package com.solux.pyi.pyiplanyouridea.memos.service;
 
 import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
-import com.solux.pyi.pyiplanyouridea.folders.repository.FoldersRepository;
 import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
 import com.solux.pyi.pyiplanyouridea.memos.dto.MemosListResponseDto;
 import com.solux.pyi.pyiplanyouridea.memos.dto.MemosResponseDto;
@@ -130,7 +129,6 @@ public class MemosService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 퀵메모가 없습니다. memoId = " + memoId));
 
         memosRepository.delete(memos);
-        // memosRepository.delete(posts);
         // - JpaRepository에서 이미 delete 메소드를 지원하고 있으니 이를 활용한다.
         // - 엔티티를 파라미터로 삭제할 수도 있고, deleteById 메소드를 이용하면 id로 삭제할 수도 있다.
         // - 존재하는 Memos인지 확인을 위해 엔티티 조회 후 그대로 삭제한다.

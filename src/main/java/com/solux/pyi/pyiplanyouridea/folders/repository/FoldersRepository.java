@@ -1,5 +1,10 @@
 package com.solux.pyi.pyiplanyouridea.folders.repository;
 
+import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+
 // 2
 
 // Domain Model
@@ -27,8 +32,7 @@ package com.solux.pyi.pyiplanyouridea.folders.repository;
 // 이때 Entity 클래스와 기본 Repository는
 // 함께 움직여야 하므로 도메인 패키지에서 함께 관리한다.
 
-import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
-import org.springframework.data.jpa.repository.JpaRepository;
+
 
 // Posts 클래스로 Database를 접근하게 해줄 JpaRepository
 public interface FoldersRepository extends JpaRepository<Folders, Long> {
