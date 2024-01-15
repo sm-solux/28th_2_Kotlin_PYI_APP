@@ -50,13 +50,13 @@ public class TodosService {
 
     // 할 일 하나 생성
     @Transactional
-    public Long save(Memos memoId, TodosSaveRequestDto requestDto) {
-        return todosRepository.save(requestDto.toEntity(memoId)).getTodoId();
+    public Long save(Memos memoUuid, TodosSaveRequestDto requestDto) {
+        return todosRepository.save(requestDto.toEntity(memoUuid)).getTodoUuid();
     }
 
     // 할 일 하나 수정
     @Transactional
-    public Long update(Long todoId, TodosUpdateRequestDto requestDto) {
+    public Long update(Long todoUuid, TodosUpdateRequestDto requestDto) {
     // update 기능에서 데이터베이스에 쿼리를 날리는 부분이 없다.
     // 이것이 가능한 이유는 JPA의 영속성 컨텍스트 때문이다.
     // 영속성 컨텍스트란, 엔티티를 영구 저장하는 환경이다.
@@ -71,19 +71,19 @@ public class TodosService {
     // 즉, Entity 객체의 값만 변경하면 별도로
     // Update 쿼리를 날릴 필요가 없다는 것이다.
     // 이 개념을 더티 체킹(dirty checking)이라고 한다.
-        Todos todos = todosRepository.findById(todoId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 할 일이 없습니다. todoId = " + todoId));
+        Todos todos = todosRepository.findById(todoUuid)
+                .orElseThrow(() -> new IllegalArgumentException("해당 할 일이 없습니다. todoId = " + todoUuid));
 
-        todos.update(requestDto.getTodoDate(), requestDto.getTodo());
+        todos.update(requestDto.getTodoDate(), requestDto.getTodoDetails());
 
-        return todoId;
+        return todoUuid;
     }
 
     // 할 일 하나 삭제
     @Transactional
-    public void delete(Long todoId) {
-        Todos todos = todosRepository.findById(todoId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 할 일이 없습니다. todoId = " + todoId));
+    public void delete(Long todoUuid) {
+        Todos todos = todosRepository.findById(todoUuid)
+                .orElseThrow(() -> new IllegalArgumentException("해당 할 일이 없습니다. todoId = " + todoUuid));
 
         todosRepository.delete(todos);
         // - JpaRepository에서 이미 delete 메소드를 지원하고 있으니 이를 활용한다.

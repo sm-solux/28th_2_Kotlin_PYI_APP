@@ -1,6 +1,7 @@
 package com.solux.pyi.pyiplanyouridea.star.domain;
 
 import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
+import com.solux.pyi.pyiplanyouridea.users.domain.Users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -65,28 +66,34 @@ public class Star {
     // (2) 인덱스에 좋은 영향을 끼치지 못한다.
     // (3) 유니크한 조건이 변경될 경우 PK 전체를 수정해야 하는 일이 발생한다.
     // 주민등록번호, 복합키 등은 유니크 키로 별도로 추가하는 것이 추천된다.
-    @Column(name = "star_id", columnDefinition = "bigint(16)", nullable = false)
-    private Long starId;
+    @Column(name = "star_uuid", columnDefinition = "bigint(16)", nullable = false)
+    private Long starUuid;
+
+//    @ManyToOne
+//    @JoinColumn(name = "user_uuid", columnDefinition = "bigint(16)", nullable = false)
+//    private Users userUuid;
 
     @OneToOne
-    @JoinColumn(name = "memo_id", columnDefinition = "bigint(16)", nullable = false)
-    private Memos memoId;
+    @JoinColumn(name = "memo_uuid", columnDefinition = "bigint(16)", nullable = false)
+    private Memos memoUuid;
 
-    @Column(name = "star", columnDefinition = "varchar(30)", nullable = false)
-    private BigDecimal star;
+    @Column(name = "star_details", columnDefinition = "decimal(2,1)", nullable = false)
+    private BigDecimal starDetails;
 
     @Builder
     // @Builder
     // - 해당 클래스의 빌더 패턴 클래스를 생성
     // - 생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
-    public Star(Memos memoId, BigDecimal star) {
-        this.memoId = memoId;
-        this.star = star;
+    //public Star(Users userUuid, Memos memoUuid, BigDecimal starDetails) {
+    public Star(Memos memoUuid, BigDecimal starDetails) {
+        //this.userUuid = userUuid;
+        this.memoUuid = memoUuid;
+        this.starDetails = starDetails;
     }
 
     // 별점 수정
-    public void update(BigDecimal star) {
-        this.star = star;
+    public void update(BigDecimal starDetails) {
+        this.starDetails = starDetails;
     }
 
 }

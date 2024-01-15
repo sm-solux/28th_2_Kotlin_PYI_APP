@@ -49,13 +49,13 @@ public class StarService {
 
     // 별점 생성
     @Transactional
-    public Long save(Memos memoId, StarSaveRequestDto requestDto) {
-        return starRepository.save(requestDto.toEntity(memoId)).getStarId();
+    public Long save(Memos memoUuid, StarSaveRequestDto requestDto) {
+        return starRepository.save(requestDto.toEntity(memoUuid)).getStarUuid();
     }
 
     // 별점 수정
     @Transactional
-    public Long update(Long starId, StarUpdateRequestDto requestDto) {
+    public Long update(Long starUuid, StarUpdateRequestDto requestDto) {
     // update 기능에서 데이터베이스에 쿼리를 날리는 부분이 없다.
     // 이것이 가능한 이유는 JPA의 영속성 컨텍스트 때문이다.
     // 영속성 컨텍스트란, 엔티티를 영구 저장하는 환경이다.
@@ -70,11 +70,11 @@ public class StarService {
     // 즉, Entity 객체의 값만 변경하면 별도로
     // Update 쿼리를 날릴 필요가 없다는 것이다.
     // 이 개념을 더티 체킹(dirty checking)이라고 한다.
-        Star star = starRepository.findById(starId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 별점이 없습니다. starId = " + starId));
+        Star star = starRepository.findById(starUuid)
+                .orElseThrow(() -> new IllegalArgumentException("해당 별점이 없습니다. starId = " + starUuid));
 
-        star.update(requestDto.getStar());
+        star.update(requestDto.getStarDetails());
 
-        return starId;
+        return starUuid;
     }
 }

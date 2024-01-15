@@ -2,6 +2,7 @@ package com.solux.pyi.pyiplanyouridea.star.dto;
 
 import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
 import com.solux.pyi.pyiplanyouridea.star.domain.Star;
+import com.solux.pyi.pyiplanyouridea.users.domain.Users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,8 +46,10 @@ import java.math.BigDecimal;
 // - 기본 생성자 자동 추가
 // - public Memos() {} 와 같은 효과
 public class StarSaveRequestDto {
-    private Memos memoId;
-    private BigDecimal star;
+    //private Users userUuid;
+    private Memos memoUuid;
+    private BigDecimal starDetails;
+
     @Builder
     // - 해당 클래스의 빌더 패턴 클래스를 생성
     // - 생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
@@ -54,15 +57,18 @@ public class StarSaveRequestDto {
     // 다만, 생성자의 경우 지금 채워야 할 필드가 무엇인지 명확히 지정할 수가 없다.
     // 생성자에서는 매개변수의 위치를 변경해도 코드를 실행하기 전까지는 문제를 찾을 수 없다.
     // 하지만 빌더를 사용하게 되면 어느 필드에 어떤 값을 채워야 할지 명확하게 인지할 수 있다.
-    public StarSaveRequestDto(Memos memoId, BigDecimal star) {
-        this.memoId = memoId;
-        this.star = star;
+    //public StarSaveRequestDto(Users userUuid, Memos memoUuid, BigDecimal starDetails) {
+    public StarSaveRequestDto(Memos memoUuid, BigDecimal starDetails) {
+        //this.userUuid = userUuid;
+        this.memoUuid = memoUuid;
+        this.starDetails = starDetails;
     }
 
-    public Star toEntity(Memos memoId) {
+    public Star toEntity(Memos memoUuid) {
         return Star.builder()
-                .memoId(memoId)
-                .star(star)
+                //.userUuid(userUuid)
+                .memoUuid(memoUuid)
+                .starDetails(starDetails)
                 .build();
     }
 

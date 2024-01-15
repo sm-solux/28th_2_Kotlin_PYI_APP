@@ -4,6 +4,8 @@ import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
 import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 // Request 요청을 받을 Dto
 
 // Dtos
@@ -43,15 +45,17 @@ public class MemosListResponseDto {
 // 해당 경우 굳이 모든 필드를 가진 생성자(@NoArgsConstructor)가
 // 필요하진 않으므로 Dto는 Entity를 받아 처리한다.
 
-    private Long memoId;
-    private Folders folderId;
+    private Long memoUuid;
+    private Folders folderUuid;
     private String memoTitle;
     private String memoDetails;
+    private LocalDateTime memoCreated;
 
     public MemosListResponseDto(Memos entity) {
-        this.memoId = entity.getMemoId();
-        this.folderId = entity.getFolderId();
+        this.memoUuid = entity.getMemoUuid();
+        this.folderUuid = entity.getFolderUuid();
         this.memoTitle = entity.getMemoTitle();
         this.memoDetails = entity.getMemoDetails();
+        this.memoCreated = entity.getMemoCreated();
     }
 }

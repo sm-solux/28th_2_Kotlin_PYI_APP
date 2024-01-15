@@ -49,16 +49,16 @@ public class MemosController {
     private final FoldersRepository foldersRepository;
 
     // 퀵메모 저장
-    @PostMapping("/writequickmemo/{folderId}")
-    public Long save(@PathVariable Long folderId, @RequestBody MemosSaveRequestDto requestDto) {
-        Folders folders = foldersRepository.getReferenceById(folderId);
+    @PostMapping("/writequickmemo/{folderUuid}")
+    public Long save(@PathVariable Long folderUuid, @RequestBody MemosSaveRequestDto requestDto) {
+        Folders folders = foldersRepository.getReferenceById(folderUuid);
         return memosService.save(folders, requestDto);
     }
 
     // 퀵메모 조회
-    @GetMapping("/viewquickmemo/{memoId}")
-    public MemosResponseDto findById(@PathVariable Long memoId) {
-        return memosService.findById(memoId);
+    @GetMapping("/viewquickmemo/{memoUuid}")
+    public MemosResponseDto findById(@PathVariable Long memoUuid) {
+        return memosService.findById(memoUuid);
     }
 
 //    // 퀵메모 리스트 전체 조회
@@ -68,21 +68,21 @@ public class MemosController {
 //    }
 
     // 퀵메모 폴더별 리스트 조회
-    @GetMapping("/viewfolderquickmemolist/{folderId}")
-    public List<MemosListResponseDto> getMemosList(@PathVariable Folders folderId) {
-        return memosService.findByFolder(folderId);
+    @GetMapping("/viewfolderquickmemolist/{folderUuid}")
+    public List<MemosListResponseDto> getMemosList(@PathVariable Folders folderUuid) {
+        return memosService.findByFolder(folderUuid);
     }
 
     // 퀵메모 수정
-    @PutMapping("/editquickmemo/{memoId}")
-    public Long update(@PathVariable Long memoId, @RequestBody MemosUpdateRequestDto requestDto) {
-        return memosService.update(memoId, requestDto);
+    @PutMapping("/editquickmemo/{memoUuid}")
+    public Long update(@PathVariable Long memoUuid, @RequestBody MemosUpdateRequestDto requestDto) {
+        return memosService.update(memoUuid, requestDto);
     }
 
     // 퀵메모 삭제
-    @DeleteMapping("/deletequickmemo/{memoId}")
-    public Long delete(@PathVariable Long memoId) {
-        memosService.delete(memoId);
-        return memoId;
+    @DeleteMapping("/deletequickmemo/{memoUuid}")
+    public Long delete(@PathVariable Long memoUuid) {
+        memosService.delete(memoUuid);
+        return memoUuid;
     }
 }

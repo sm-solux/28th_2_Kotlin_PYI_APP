@@ -51,22 +51,22 @@ public class ReviewService {
 
     // 결과물 기록 및 평가 하나 저장
     @Transactional
-    public Long save(Memos memoId, ReviewSaveRequestDto requestDto) {
-        return reviewRepository.save(requestDto.toEntity(memoId)).getReviewId();
+    public Long save(Memos memoUuid, ReviewSaveRequestDto requestDto) {
+        return reviewRepository.save(requestDto.toEntity(memoUuid)).getReviewUuid();
     }
 
     // 결과물 기록 및 평가 하나 조회
     @Transactional
-    public ReviewResponseDto findById(Long reviewId) {
-        Review entity = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 결과물 기록 및 평가가 없습니다. reviewId = " + reviewId));
+    public ReviewResponseDto findById(Long reviewUuid) {
+        Review entity = reviewRepository.findById(reviewUuid)
+                .orElseThrow(() -> new IllegalArgumentException("해당 결과물 기록 및 평가가 없습니다. reviewUuid = " + reviewUuid));
 
         return new ReviewResponseDto(entity);
     }
 
     // 결과물 기록 및 평가 하나 수정
     @Transactional
-    public Long update(Long reviewId, ReviewUpdateRequestDto requestDto) {
+    public Long update(Long reviewUuid, ReviewUpdateRequestDto requestDto) {
     // update 기능에서 데이터베이스에 쿼리를 날리는 부분이 없다.
     // 이것이 가능한 이유는 JPA의 영속성 컨텍스트 때문이다.
     // 영속성 컨텍스트란, 엔티티를 영구 저장하는 환경이다.
@@ -81,19 +81,19 @@ public class ReviewService {
     // 즉, Entity 객체의 값만 변경하면 별도로
     // Update 쿼리를 날릴 필요가 없다는 것이다.
     // 이 개념을 더티 체킹(dirty checking)이라고 한다.
-        Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 결과물 기록 및 평가가 없습니다. reviewId = " + reviewId));
+        Review review = reviewRepository.findById(reviewUuid)
+                .orElseThrow(() -> new IllegalArgumentException("해당 결과물 기록 및 평가가 없습니다. reviewUuid = " + reviewUuid));
 
-        review.update(requestDto.getReviewTitle(), requestDto.getReview());
+        review.update(requestDto.getReviewTitle(), requestDto.getReviewDetails());
 
-        return reviewId;
+        return reviewUuid;
     }
 
     // 결과물 기록 및 평가 하나 삭제
     @Transactional
-    public void delete(Long reviewId) {
-        Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 결과물 기록 및 평가가 없습니다. reviewId = " + reviewId));
+    public void delete(Long reviewUuid) {
+        Review review = reviewRepository.findById(reviewUuid)
+                .orElseThrow(() -> new IllegalArgumentException("해당 결과물 기록 및 평가가 없습니다. reviewUuid = " + reviewUuid));
 
         reviewRepository.delete(review);
         // - JpaRepository에서 이미 delete 메소드를 지원하고 있으니 이를 활용한다.

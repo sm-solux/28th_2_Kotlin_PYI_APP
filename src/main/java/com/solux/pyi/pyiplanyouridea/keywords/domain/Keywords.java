@@ -1,11 +1,14 @@
 package com.solux.pyi.pyiplanyouridea.keywords.domain;
 
 import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
+import com.solux.pyi.pyiplanyouridea.users.domain.Users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 // 1
 
@@ -62,23 +65,34 @@ public class Keywords {
     // (2) 인덱스에 좋은 영향을 끼치지 못한다.
     // (3) 유니크한 조건이 변경될 경우 PK 전체를 수정해야 하는 일이 발생한다.
     // 주민등록번호, 복합키 등은 유니크 키로 별도로 추가하는 것이 추천된다.
-    @Column(name = "keyword_id", columnDefinition = "bigint(16)", nullable = false)
-    private Long keywordId;
+    @Column(name = "keyword_uuid", columnDefinition = "bigint(16)", nullable = false)
+    private Long keywordUuid;
+
+//    @ManyToOne
+//    @JoinColumn(name = "user_uuid", columnDefinition = "bigint(16)", nullable = false)
+//    private Users userUuid;
 
     @ManyToOne
-    @JoinColumn(name = "memo_id", columnDefinition = "bigint(16)", nullable = false)
-    private Memos memoId;
+    @JoinColumn(name = "memo_uuid", columnDefinition = "bigint(16)", nullable = false)
+    private Memos memoUuid;
 
-    @Column(name = "keyword", columnDefinition = "varchar(30)", nullable = false)
-    private String keyword;
+    @Column(name = "keyword_details", columnDefinition = "varchar(30)", nullable = false)
+    private String keywordDetails;
+
+    @CreationTimestamp
+    @Column(name = "keyword_created", columnDefinition = "timestamp", nullable = false)
+    private LocalDateTime keywordCreated;
 
     @Builder
     // @Builder
     // - 해당 클래스의 빌더 패턴 클래스를 생성
     // - 생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
-    public Keywords(Memos memoId, String keyword) {
-        this.memoId = memoId;
-        this.keyword = keyword;
+    //public Keywords(Users userUuid, Memos memoUuid, String keywordDetails, LocalDateTime keywordCreated) {
+    public Keywords(Memos memoUuid, String keywordDetails, LocalDateTime keywordCreated) {
+        //this.userUuid = userUuid;
+        this.memoUuid = memoUuid;
+        this.keywordDetails = keywordDetails;
+        this.keywordCreated = keywordCreated;
     }
 
 

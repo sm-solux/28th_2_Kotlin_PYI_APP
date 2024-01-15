@@ -1,11 +1,14 @@
 package com.solux.pyi.pyiplanyouridea.memos.domain;
 
 import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
+import com.solux.pyi.pyiplanyouridea.users.domain.Users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 // 1
 
@@ -62,18 +65,26 @@ public class Memos {
     // (2) 인덱스에 좋은 영향을 끼치지 못한다.
     // (3) 유니크한 조건이 변경될 경우 PK 전체를 수정해야 하는 일이 발생한다.
     // 주민등록번호, 복합키 등은 유니크 키로 별도로 추가하는 것이 추천된다.
-    @Column(name = "memo_id", columnDefinition = "bigint(16)", nullable = false)
-    private Long memoId;
+    @Column(name = "memo_uuid", columnDefinition = "bigint(16)", nullable = false)
+    private Long memoUuid;
+
+//    @ManyToOne
+//    @JoinColumn(name = "user_uuid", columnDefinition = "bigint(16)", nullable = false)
+//    private Users userUuid;
 
     @ManyToOne
-    @JoinColumn(name = "folder_id", columnDefinition = "bigint(16)", nullable = false)
-    private Folders folderId;
+    @JoinColumn(name = "folder_uuid", columnDefinition = "bigint(16)", nullable = false)
+    private Folders folderUuid;
 
     @Column(name = "memo_title", columnDefinition = "varchar(30)", nullable = false)
     private String memoTitle;
 
     @Column(name = "memo_details", columnDefinition = "text", nullable = false)
     private String memoDetails;
+
+    @CreationTimestamp
+    @Column(name = "memo_created", columnDefinition = "timestamp", nullable = false)
+    private LocalDateTime memoCreated;
 
     @Builder
     // @Builder
@@ -83,10 +94,13 @@ public class Memos {
     // 다만, 생성자의 경우 지금 채워야 할 필드가 무엇인지 명확히 지정할 수가 없다.
     // 생성자에서는 매개변수의 위치를 변경해도 코드를 실행하기 전까지는 문제를 찾을 수 없다.
     // 하지만 빌더를 사용하게 되면 어느 필드에 어떤 값을 채워야 할지 명확하게 인지할 수 있다.
-    public Memos(Folders folderId, String memoTitle, String memoDetails) {
-        this.folderId = folderId;
+    //public Memos(Users userUuid, Folders folderUuid, String memoTitle, String memoDetails, LocalDateTime memoCreated) {
+    public Memos(Folders folderUuid, String memoTitle, String memoDetails, LocalDateTime memoCreated) {
+        //this.userUuid = userUuid;
+        this.folderUuid = folderUuid;
         this.memoTitle = memoTitle;
         this.memoDetails = memoDetails;
+        this.memoCreated = memoCreated;
     }
 
     // 퀵메모 수정

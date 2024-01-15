@@ -54,15 +54,15 @@ public class MemosService {
     // 퀵메모 저장
     @Transactional
     //public Long save(MemosSaveRequestDto requestDto) {
-    public Long save(Folders folderId, MemosSaveRequestDto requestDto) {
-        return memosRepository.save(requestDto.toEntity(folderId)).getMemoId();
+    public Long save(Folders folderUuid, MemosSaveRequestDto requestDto) {
+        return memosRepository.save(requestDto.toEntity(folderUuid)).getMemoUuid();
     }
 
     // 퀵메모 조회
     @Transactional
-    public MemosResponseDto findById(Long memoId) {
-        Memos entity = memosRepository.findById(memoId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 퀵메모가 없습니다. memoId = " + memoId));
+    public MemosResponseDto findById(Long memoUuid) {
+        Memos entity = memosRepository.findById(memoUuid)
+                .orElseThrow(() -> new IllegalArgumentException("해당 퀵메모가 없습니다. memoUuid = " + memoUuid));
 
         return new MemosResponseDto(entity);
     }
@@ -90,15 +90,15 @@ public class MemosService {
 
     // 퀵메모 폴더별 리스트 조회
     @Transactional(readOnly = true)
-    public List<MemosListResponseDto> findByFolder(Folders folderId) {
-        return memosRepository.findMemosByFolderId(folderId).stream()
+    public List<MemosListResponseDto> findByFolder(Folders folderUuid) {
+        return memosRepository.findMemosByFolderUuid(folderUuid).stream()
                 .map(MemosListResponseDto::new)
                 .collect(Collectors.toList());
     }
 
     // 퀵메모 수정
     @Transactional
-    public Long update(Long memoId, MemosUpdateRequestDto requestDto) {
+    public Long update(Long memoUuid, MemosUpdateRequestDto requestDto) {
     // update 기능에서 데이터베이스에 쿼리를 날리는 부분이 없다.
     // 이것이 가능한 이유는 JPA의 영속성 컨텍스트 때문이다.
     // 영속성 컨텍스트란, 엔티티를 영구 저장하는 환경이다.
@@ -113,20 +113,20 @@ public class MemosService {
     // 즉, Entity 객체의 값만 변경하면 별도로
     // Update 쿼리를 날릴 필요가 없다는 것이다.
     // 이 개념을 더티 체킹(dirty checking)이라고 한다.
-        Memos memos = memosRepository.findById(memoId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 퀵메모가 없습니다. memoId = " + memoId));
+        Memos memos = memosRepository.findById(memoUuid)
+                .orElseThrow(() -> new IllegalArgumentException("해당 퀵메모가 없습니다. memoUuid = " + memoUuid));
 
         //memos.update(requestDto.getFolderId(), requestDto.getMemoTitle(), requestDto.getMemoDetails());
         memos.update(requestDto.getMemoTitle(), requestDto.getMemoDetails());
 
-        return memoId;
+        return memoUuid;
     }
 
     // 퀵메모 삭제
     @Transactional
-    public void delete(Long memoId) {
-        Memos memos = memosRepository.findById(memoId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 퀵메모가 없습니다. memoId = " + memoId));
+    public void delete(Long memoUuid) {
+        Memos memos = memosRepository.findById(memoUuid)
+                .orElseThrow(() -> new IllegalArgumentException("해당 퀵메모가 없습니다. memoUuid = " + memoUuid));
 
         memosRepository.delete(memos);
         // - JpaRepository에서 이미 delete 메소드를 지원하고 있으니 이를 활용한다.

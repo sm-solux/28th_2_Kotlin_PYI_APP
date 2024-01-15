@@ -1,11 +1,14 @@
 package com.solux.pyi.pyiplanyouridea.review.domain;
 
 import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
+import com.solux.pyi.pyiplanyouridea.users.domain.Users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 // 1
 
@@ -62,18 +65,26 @@ public class Review {
     // (2) 인덱스에 좋은 영향을 끼치지 못한다.
     // (3) 유니크한 조건이 변경될 경우 PK 전체를 수정해야 하는 일이 발생한다.
     // 주민등록번호, 복합키 등은 유니크 키로 별도로 추가하는 것이 추천된다.
-    @Column(name = "review_id", columnDefinition = "bigint(16)", nullable = false)
-    private Long reviewId;
+    @Column(name = "review_uuid", columnDefinition = "bigint(16)", nullable = false)
+    private Long reviewUuid;
+
+//    @ManyToOne
+//    @JoinColumn(name = "user_uuid", columnDefinition = "bigint(16)", nullable = false)
+//    private Users userUuid;
 
     @OneToOne
-    @JoinColumn(name = "memo_id", columnDefinition = "bigint(16)", nullable = false)
-    private Memos memoId;
+    @JoinColumn(name = "memo_uuid", columnDefinition = "bigint(16)", nullable = false)
+    private Memos memoUuid;
 
     @Column(name = "review_title", columnDefinition = "varchar(30)", nullable = false)
     private String reviewTitle;
 
-    @Column(name = "review", columnDefinition = "text", nullable = false)
-    private String review;
+    @Column(name = "review_details", columnDefinition = "text", nullable = false)
+    private String reviewDetails;
+
+    @CreationTimestamp
+    @Column(name = "review_created", columnDefinition = "timestamp", nullable = false)
+    private LocalDateTime reviewCreated;
 
     @Builder
     // @Builder
@@ -83,16 +94,19 @@ public class Review {
     // 다만, 생성자의 경우 지금 채워야 할 필드가 무엇인지 명확히 지정할 수가 없다.
     // 생성자에서는 매개변수의 위치를 변경해도 코드를 실행하기 전까지는 문제를 찾을 수 없다.
     // 하지만 빌더를 사용하게 되면 어느 필드에 어떤 값을 채워야 할지 명확하게 인지할 수 있다.
-    public Review(Memos memoId, String reviewTitle, String review) {
-        this.memoId = memoId;
+    //public Review(Users userUuid, Memos memoUuid, String reviewTitle, String reviewDetails, LocalDateTime reviewCreated) {
+    public Review(Memos memoUuid, String reviewTitle, String reviewDetails, LocalDateTime reviewCreated) {
+        //this.userUuid = userUuid;
+        this.memoUuid = memoUuid;
         this.reviewTitle = reviewTitle;
-        this.review = review;
+        this.reviewDetails = reviewDetails;
+        this.reviewCreated = reviewCreated;
     }
 
     // 결과물 기록 및 평가 수정
-    public void update(String reviewTitle, String review) {
+    public void update(String reviewTitle, String reviewDetails) {
         this.reviewTitle = reviewTitle;
-        this.review = review;
+        this.reviewDetails = reviewDetails;
     }
 
 }

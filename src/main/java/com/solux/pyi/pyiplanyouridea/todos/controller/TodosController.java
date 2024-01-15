@@ -47,23 +47,23 @@ public class TodosController {
     private final MemosRepository memosRepository;
 
     // 할 일 하나 생성
-    @PostMapping("/createtodo/{memoId}")
-    public Long save(@PathVariable Long memoId, @RequestBody TodosSaveRequestDto requestDto) {
-        Memos memos = memosRepository.getReferenceById(memoId);
+    @PostMapping("/createtodo/{memoUuid}")
+    public Long save(@PathVariable Long memoUuid, @RequestBody TodosSaveRequestDto requestDto) {
+        Memos memos = memosRepository.getReferenceById(memoUuid);
         return todosService.save(memos, requestDto);
     }
 
     // 할 일 하나 수정
-    @PutMapping("/edittodo/{todoId}")
-    public Long update(@PathVariable Long todoId, @RequestBody TodosUpdateRequestDto requestDto) {
-        return todosService.update(todoId, requestDto);
+    @PutMapping("/edittodo/{todoUuid}")
+    public Long update(@PathVariable Long todoUuid, @RequestBody TodosUpdateRequestDto requestDto) {
+        return todosService.update(todoUuid, requestDto);
     }
 
     // 할 일 하나 삭제
-    @DeleteMapping("/deletetodo/{todoId}")
-    public Long delete(@PathVariable Long todoId) {
-        todosService.delete(todoId);
-        return todoId;
+    @DeleteMapping("/deletetodo/{todoUuid}")
+    public Long delete(@PathVariable Long todoUuid) {
+        todosService.delete(todoUuid);
+        return todoUuid;
     }
 
 

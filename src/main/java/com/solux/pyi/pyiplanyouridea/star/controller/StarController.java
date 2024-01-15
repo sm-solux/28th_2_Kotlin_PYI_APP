@@ -47,15 +47,15 @@ public class StarController {
     private final MemosRepository memosRepository;
 
     // 별점 생성
-    @PostMapping("/createstar/{memoId}")
-    public Long save(@PathVariable Long memoId, @RequestBody StarSaveRequestDto requestDto) {
-        Memos memos = memosRepository.getReferenceById(memoId);
+    @PostMapping("/createstar/{memoUuid}")
+    public Long save(@PathVariable Long memoUuid, @RequestBody StarSaveRequestDto requestDto) {
+        Memos memos = memosRepository.getReferenceById(memoUuid);
         return starService.save(memos, requestDto);
     }
 
     // 별점 수정
-    @PutMapping("/editstar/{starId}")
-    public Long update(@PathVariable Long starId, @RequestBody StarUpdateRequestDto requestDto) {
-        return starService.update(starId, requestDto);
+    @PutMapping("/editstar/{starUuid}")
+    public Long update(@PathVariable Long starUuid, @RequestBody StarUpdateRequestDto requestDto) {
+        return starService.update(starUuid, requestDto);
     }
 }

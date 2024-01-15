@@ -46,15 +46,15 @@ public class ReviewResponseDto {
 // 해당 경우 굳이 모든 필드를 가진 생성자(@NoArgsConstructor)가
 // 필요하진 않으므로 Dto는 Entity를 받아 처리한다.
 
-    private Long reviewId;
-    private Memos memoId;
+    private Long reviewUuid;
+    private Memos memoUuid;
     private String reviewTitle;
-    private String review;
+    private String reviewDetails;
 
     public ReviewResponseDto(Review entity) {
-        this.reviewId = entity.getReviewId();
-        this.memoId = entity.getMemoId();
+        this.reviewUuid = entity.getReviewUuid();
+        this.memoUuid = entity.getMemoUuid();
         this.reviewTitle = entity.getReviewTitle();
-        this.review = entity.getReview();
+        this.reviewDetails = entity.getReviewDetails();
     }
 }

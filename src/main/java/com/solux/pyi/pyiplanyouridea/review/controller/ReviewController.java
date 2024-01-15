@@ -48,29 +48,29 @@ public class ReviewController {
     private final MemosRepository memosRepository;
 
     // 결과물 기록 및 평가 하나 저장
-    @PostMapping("/createreview/{memoId}")
-    public Long save(@PathVariable Long memoId, @RequestBody ReviewSaveRequestDto requestDto) {
-        Memos memos = memosRepository.getReferenceById(memoId);
+    @PostMapping("/createreview/{memoUuid}")
+    public Long save(@PathVariable Long memoUuid, @RequestBody ReviewSaveRequestDto requestDto) {
+        Memos memos = memosRepository.getReferenceById(memoUuid);
         return reviewService.save(memos, requestDto);
     }
 
     // 결과물 기록 및 평가 하나 조회
-    @GetMapping("/viewreview/{reviewId}")
-    public ReviewResponseDto findById(@PathVariable Long reviewId) {
-        return reviewService.findById(reviewId);
+    @GetMapping("/viewreview/{reviewUuid}")
+    public ReviewResponseDto findById(@PathVariable Long reviewUuid) {
+        return reviewService.findById(reviewUuid);
     }
 
     // 결과물 기록 및 평가 하나 수정
-    @PutMapping("/editreview/{reviewId}")
-    public Long update(@PathVariable Long reviewId, @RequestBody ReviewUpdateRequestDto requestDto) {
-        return reviewService.update(reviewId, requestDto);
+    @PutMapping("/editreview/{reviewUuid}")
+    public Long update(@PathVariable Long reviewUuid, @RequestBody ReviewUpdateRequestDto requestDto) {
+        return reviewService.update(reviewUuid, requestDto);
     }
 
     // 결과물 기록 및 평가 하나 삭제
-    @DeleteMapping("/deletereview/{reviewId}")
-    public Long delete(@PathVariable Long reviewId) {
-        reviewService.delete(reviewId);
-        return reviewId;
+    @DeleteMapping("/deletereview/{reviewUuid}")
+    public Long delete(@PathVariable Long reviewUuid) {
+        reviewService.delete(reviewUuid);
+        return reviewUuid;
     }
 
 }

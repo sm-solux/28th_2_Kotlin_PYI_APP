@@ -37,7 +37,7 @@ public class Users {
     @Column(name = "user_uuid", columnDefinition = "bigint(16)", nullable = false)
     private Long userUuid;
 
-    @Column(name = "user_id", columnDefinition = "bigint(16)", nullable = false)
+    @Column(name = "user_id", columnDefinition = "varchar(30)", nullable = false)
     private String userId;
 
     @Column(name = "user_pw", columnDefinition = "varchar(30)", nullable = false)

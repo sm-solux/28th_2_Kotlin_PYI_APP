@@ -47,6 +47,6 @@ public interface MemosRepository extends JpaRepository<Memos, Long> {
 //    List<Memos> findAllDesc();
 
     // folderUuid에 해당하는 퀵메모 목록 조회
-    List<Memos> findMemosByFolderId(@Param("folderId") Folders folderId);
+    List<Memos> findMemosByFolderUuid(@Param("folderUuid") Folders folderId);
 
 }
