@@ -2,10 +2,7 @@ package com.solux.pyi.pyiplanyouridea.memos.controller;
 
 import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
 import com.solux.pyi.pyiplanyouridea.folders.repository.FoldersRepository;
-import com.solux.pyi.pyiplanyouridea.memos.dto.MemosListResponseDto;
-import com.solux.pyi.pyiplanyouridea.memos.dto.MemosResponseDto;
-import com.solux.pyi.pyiplanyouridea.memos.dto.MemosSaveRequestDto;
-import com.solux.pyi.pyiplanyouridea.memos.dto.MemosUpdateRequestDto;
+import com.solux.pyi.pyiplanyouridea.memos.dto.*;
 import com.solux.pyi.pyiplanyouridea.memos.service.MemosService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -73,6 +70,15 @@ public class MemosController {
         return memosService.findByFolder(folderUuid);
     }
 
+    /*
+    // 퀵메모 폴더별 리스트 조회
+    @GetMapping("/viewfolderquickmemolist/{folderUuid}")
+    public List<MemosListResponseDto> getMemosList(@PathVariable Long folderUuid) {
+        Folders folders = foldersRepository.getReferenceById(folderUuid);
+        return memosService.findByFolder(folders.getFolderUuid());
+    }
+    */
+
     // 퀵메모 수정
     @PutMapping("/editquickmemo/{memoUuid}")
     public Long update(@PathVariable Long memoUuid, @RequestBody MemosUpdateRequestDto requestDto) {
@@ -84,5 +90,13 @@ public class MemosController {
     public Long delete(@PathVariable Long memoUuid) {
         memosService.delete(memoUuid);
         return memoUuid;
+    }
+
+
+
+    // 아이디어 구체화 및 실현 조회
+    @GetMapping("/ideas/{memoUuid}")
+    public IdeasListResponseDto getIdeasList(@PathVariable Long memoUuid) {
+        return memosService.getIdeasById(memoUuid);
     }
 }

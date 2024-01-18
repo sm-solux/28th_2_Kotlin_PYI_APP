@@ -40,7 +40,8 @@ public class Folders {
     @Column(name = "folder_uuid", columnDefinition = "bigint(16)", nullable = false)
     private Long folderUuid;
 
-    @ManyToOne
+    //@ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_uuid", columnDefinition = "bigint(16)", nullable = false)
     private Users userUuid;
 

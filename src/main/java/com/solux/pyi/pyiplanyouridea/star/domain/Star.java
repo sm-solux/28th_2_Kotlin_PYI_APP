@@ -73,7 +73,8 @@ public class Star {
 //    @JoinColumn(name = "user_uuid", columnDefinition = "bigint(16)", nullable = false)
 //    private Users userUuid;
 
-    @OneToOne
+    //@OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memo_uuid", columnDefinition = "bigint(16)", nullable = false)
     private Memos memoUuid;
 

@@ -3,6 +3,7 @@ package com.solux.pyi.pyiplanyouridea.memos.repository;
 import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
 import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -48,5 +49,7 @@ public interface MemosRepository extends JpaRepository<Memos, Long> {
 
     // folderUuid에 해당하는 퀵메모 목록 조회
     List<Memos> findMemosByFolderUuid(@Param("folderUuid") Folders folderId);
+    //@Query("SELECT m FROM Memos m JOIN FETCH m.folderUuid WHERE m.folderUuid.folderUuid = :folderUuid")
+    //List<Memos> findMemosByFolderUuid(@Param("folderUuid") Long folderUuid);
 
 }

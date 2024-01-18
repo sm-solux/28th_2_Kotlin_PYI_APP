@@ -1,6 +1,11 @@
 package com.solux.pyi.pyiplanyouridea.memos.domain;
 
 import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
+import com.solux.pyi.pyiplanyouridea.keywords.domain.Keywords;
+import com.solux.pyi.pyiplanyouridea.organize.domain.Organize;
+import com.solux.pyi.pyiplanyouridea.review.domain.Review;
+import com.solux.pyi.pyiplanyouridea.star.domain.Star;
+import com.solux.pyi.pyiplanyouridea.todos.domain.Todos;
 import com.solux.pyi.pyiplanyouridea.users.domain.Users;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,6 +14,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 // 1
 
@@ -72,7 +79,7 @@ public class Memos {
 //    @JoinColumn(name = "user_uuid", columnDefinition = "bigint(16)", nullable = false)
 //    private Users userUuid;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "folder_uuid", columnDefinition = "bigint(16)", nullable = false)
     private Folders folderUuid;
 
@@ -86,6 +93,27 @@ public class Memos {
     @Column(name = "memo_created", columnDefinition = "timestamp", nullable = false)
     private LocalDateTime memoCreated;
 
+
+
+    ////////////////////////////////
+    @OneToMany(mappedBy = "memoUuid")
+    private List<Keywords> keywords = new ArrayList<Keywords>();
+
+    @OneToMany(mappedBy = "memoUuid")
+    private List<Todos> todos = new ArrayList<Todos>();
+
+    @OneToMany(mappedBy = "memoUuid")
+    private List<Organize> organize = new ArrayList<Organize>();
+
+    @OneToOne(mappedBy = "memoUuid")
+    private Review review;
+
+    @OneToOne(mappedBy = "memoUuid")
+    private Star star;
+    ////////////////////////////////
+
+
+
     @Builder
     // @Builder
     // - 해당 클래스의 빌더 패턴 클래스를 생성
@@ -95,12 +123,25 @@ public class Memos {
     // 생성자에서는 매개변수의 위치를 변경해도 코드를 실행하기 전까지는 문제를 찾을 수 없다.
     // 하지만 빌더를 사용하게 되면 어느 필드에 어떤 값을 채워야 할지 명확하게 인지할 수 있다.
     //public Memos(Users userUuid, Folders folderUuid, String memoTitle, String memoDetails, LocalDateTime memoCreated) {
+    /*
     public Memos(Folders folderUuid, String memoTitle, String memoDetails, LocalDateTime memoCreated) {
         //this.userUuid = userUuid;
         this.folderUuid = folderUuid;
         this.memoTitle = memoTitle;
         this.memoDetails = memoDetails;
         this.memoCreated = memoCreated;
+    }
+     */
+    public Memos(Folders folderUuid, String memoTitle, String memoDetails, LocalDateTime memoCreated, List<Keywords> keywords, List<Todos> todos, List<Organize> organize, Review review, Star star) {
+        this.folderUuid = folderUuid;
+        this.memoTitle = memoTitle;
+        this.memoDetails = memoDetails;
+        this.memoCreated = memoCreated;
+        this.keywords = keywords;
+        this.todos = todos;
+        this.organize = organize;
+        this.review = review;
+        this.star = star;
     }
 
     // 퀵메모 수정

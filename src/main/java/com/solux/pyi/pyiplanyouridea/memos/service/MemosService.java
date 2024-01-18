@@ -2,10 +2,7 @@ package com.solux.pyi.pyiplanyouridea.memos.service;
 
 import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
 import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
-import com.solux.pyi.pyiplanyouridea.memos.dto.MemosListResponseDto;
-import com.solux.pyi.pyiplanyouridea.memos.dto.MemosResponseDto;
-import com.solux.pyi.pyiplanyouridea.memos.dto.MemosSaveRequestDto;
-import com.solux.pyi.pyiplanyouridea.memos.dto.MemosUpdateRequestDto;
+import com.solux.pyi.pyiplanyouridea.memos.dto.*;
 import com.solux.pyi.pyiplanyouridea.memos.repository.MemosRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -96,6 +93,16 @@ public class MemosService {
                 .collect(Collectors.toList());
     }
 
+    /*
+    // 퀵메모 폴더별 리스트 조회
+    @Transactional(readOnly = true)
+    public List<MemosListResponseDto> findByFolder(Long folderUuid) {
+        return memosRepository.findMemosByFolderUuid(folderUuid).stream()
+                .map(MemosListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+     */
+
     // 퀵메모 수정
     @Transactional
     public Long update(Long memoUuid, MemosUpdateRequestDto requestDto) {
@@ -132,6 +139,17 @@ public class MemosService {
         // - JpaRepository에서 이미 delete 메소드를 지원하고 있으니 이를 활용한다.
         // - 엔티티를 파라미터로 삭제할 수도 있고, deleteById 메소드를 이용하면 id로 삭제할 수도 있다.
         // - 존재하는 Memos인지 확인을 위해 엔티티 조회 후 그대로 삭제한다.
+    }
+
+
+
+    // 아이디어 구체화 및 실현 조회
+    @Transactional
+    public IdeasListResponseDto getIdeasById(Long memoUuid) {
+        Memos entity = memosRepository.findById(memoUuid)
+                .orElseThrow(() -> new IllegalArgumentException("해당 퀵메모가 없습니다. memoUuid = " + memoUuid));
+
+        return new IdeasListResponseDto(entity);
     }
 }
 

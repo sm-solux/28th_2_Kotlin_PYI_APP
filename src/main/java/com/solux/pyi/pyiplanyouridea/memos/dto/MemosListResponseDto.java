@@ -35,10 +35,9 @@ import java.time.LocalDateTime;
 // Entity 클래스만으로 표현하기가 어려운 경우가 많다.
 // 꼭 Entity 클래스와 Controller에서 쓸 Dto는 분리해서 사용해야 한다.
 
-// 퀵메모 리스트 조회
+// 퀵메모 폴더별 리스트 조회
 @Getter
 // - 클래스 내 모든 필드의 Getter 메소드를 자동생성
-
 public class MemosListResponseDto {
 // Entity의 필드 중 일부만 사용할 경우
 // 생성자로 Entity를 받아 필드에 값을 넣는다.
