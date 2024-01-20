@@ -63,6 +63,27 @@ dependencies {
 	// 먼저 MariaDB 드라이버를 build.gradle에 등록한다.
 	// 현재는 H2 드라이버만 있는 상태이다.
 	implementation 'org.mariadb.jdbc:mariadb-java-client'
+
+
+
+	// spring security
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	//implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	// - 소셜 로그인 등 클라이언트 입장에서 소셜 기능 구현 시 필요한 의존성
+	// - spring-security-oauth2-client와 spring-security-oauth2-jose를 기본으로 관리해준다.
+
+	// "Posts_등록된다"의 테스트 로그로 응답의 결과로 200(정상 응답) Status Code를 원했는데 결과는 302(리다이렉션 응답) Status Code가 와서 실패했다.
+	// 이는 스프링 시큐리티 설정 때문에 인증되지 않은 사용자의 요청은 이동시키기 때문이다.
+	// 그래서 이런 API 요청은 임의로 인증된 사용자를 추가하여 API만 테스트해 볼 수 있게 한다.
+	// 어려운 방법은 아니며, 이미 스프링 시큐리티에서 공식적으로 방법을 지원하고 있다.
+	// 스프링 시큐리티 테스트를 위한 여러 도구를 지원하는 spring-security-test를 build.gradle에 추가한다.
+	testImplementation 'org.springframework.security:spring-security-test'
+
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+
+
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 tasks.named('test') {

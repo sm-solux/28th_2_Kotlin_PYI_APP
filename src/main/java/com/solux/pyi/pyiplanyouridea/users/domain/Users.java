@@ -1,16 +1,22 @@
 package com.solux.pyi.pyiplanyouridea.users.domain;
 
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 
 // Domain Model
 // (domain services, entities, and value objects)
 
-@Getter
-// - 클래스 내 모든 필드의 Getter 메소드를 자동생성
+@Data
+
+//@Getter
+//// - 클래스 내 모든 필드의 Getter 메소드를 자동생성
 @NoArgsConstructor
 // - 기본 생성자 자동 추가
 // - public Memos() {} 와 같은 효과
@@ -40,7 +46,34 @@ public class Users {
     @Column(name = "user_id", columnDefinition = "varchar(30)", nullable = false)
     private String userId;
 
-    @Column(name = "user_pw", columnDefinition = "varchar(30)", nullable = false)
-    private String userPw;
+    @Column(name = "user_pw", columnDefinition = "varchar(255)", nullable = false)
+    private String password;
+
+    @Column(name = "user_email", columnDefinition = "varchar(30)")
+    private String userEmail;
+
+    //@Column(name = "user_role", columnDefinition = "varchar(30)")
+    //private String userRole;
+    @Enumerated(EnumType.STRING)
+    private UsersRole userRole;
+
+//    @Column(name = "user_provider", columnDefinition = "varchar(30)")
+//    private String provider;
+//
+//    @Column(name = "user_providerId", columnDefinition = "varchar(30)")
+//    private String providerId;
+
+
+
+    @Builder
+    public Users(String userId, String password, String userEmail, UsersRole userRole) {
+    //public Users(String userId, String password, String userEmail, UsersRole userRole, String provider, String providerId) {
+        this.userId = userId;
+        this.password = password;
+        this.userEmail = userEmail;
+        this.userRole = userRole;
+        //this.provider = provider;
+        //this.providerId = providerId;
+    }
 
 }
