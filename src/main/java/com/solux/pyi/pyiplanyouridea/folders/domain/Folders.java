@@ -25,7 +25,7 @@ public class Folders {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_uuid", columnDefinition = "bigint(16)", nullable = false)
-    private Users userUuid;
+    private Users users;
 
     @Column(name = "folder_name", columnDefinition = "varchar(30)", nullable = false)
     private String folderName;
@@ -36,16 +36,14 @@ public class Folders {
 
 
 
-    //////////////////
-    @OneToMany(mappedBy = "folderUuid")
+    @OneToMany(mappedBy = "folders")
     private List<Memos> memos = new ArrayList<Memos>();
-    //////////////////
 
 
 
     @Builder
-    public Folders(Users userUuid, String folderName, LocalDateTime folderCreated, List<Memos> memos){
-        this.userUuid = userUuid;
+    public Folders(Users users, String folderName, LocalDateTime folderCreated, List<Memos> memos){
+        this.users = users;
         this.folderName = folderName;
         this.folderCreated = folderCreated;
         this.memos = memos;

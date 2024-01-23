@@ -1,7 +1,6 @@
 package com.solux.pyi.pyiplanyouridea.star.domain;
 
 import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
-import com.solux.pyi.pyiplanyouridea.users.domain.Users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -69,14 +68,9 @@ public class Star {
     @Column(name = "star_uuid", columnDefinition = "bigint(16)", nullable = false)
     private Long starUuid;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_uuid", columnDefinition = "bigint(16)", nullable = false)
-//    private Users userUuid;
-
-    //@OneToOne
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memo_uuid", columnDefinition = "bigint(16)", nullable = false)
-    private Memos memoUuid;
+    private Memos memos;
 
     @Column(name = "star_details", columnDefinition = "decimal(2,1)", nullable = false)
     private BigDecimal starDetails;
@@ -86,9 +80,9 @@ public class Star {
     // - 해당 클래스의 빌더 패턴 클래스를 생성
     // - 생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
     //public Star(Users userUuid, Memos memoUuid, BigDecimal starDetails) {
-    public Star(Memos memoUuid, BigDecimal starDetails) {
+    public Star(Memos memos, BigDecimal starDetails) {
         //this.userUuid = userUuid;
-        this.memoUuid = memoUuid;
+        this.memos = memos;
         this.starDetails = starDetails;
     }
 

@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class FoldersUpdateRequestDto {
-    private String folder_name;
+    private String folderName;
 
     @Builder
-    public FoldersUpdateRequestDto(String folder_name){
-        this.folder_name = folder_name;
+    public FoldersUpdateRequestDto(String folderName){
+        this.folderName = folderName;
     }
 
 }

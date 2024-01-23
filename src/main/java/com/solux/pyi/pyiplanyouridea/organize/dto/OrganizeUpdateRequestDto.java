@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrganizeUpdateRequestDto {
 
-    private String organize_title;
-    private String organize;
+    private String organizeTitle;
+    private String organizeDetails;
 
     @Builder
-    public OrganizeUpdateRequestDto(String title, String content){
-        this.organize_title = title;
-        this.organize = content;
+    public OrganizeUpdateRequestDto(String organizeTitle, String organizeDetails){
+        this.organizeTitle = organizeTitle;
+        this.organizeDetails = organizeDetails;
     }
 }

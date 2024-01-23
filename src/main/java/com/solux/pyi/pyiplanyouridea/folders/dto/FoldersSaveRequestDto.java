@@ -11,20 +11,20 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 public class FoldersSaveRequestDto {
+    private Long userUuid;
     private String folderName;
     private LocalDateTime folderCreated;
-    private Users userUuid;
 
     @Builder
-    public FoldersSaveRequestDto(Users userUuid, String folderName, LocalDateTime folderCreated){
+    public FoldersSaveRequestDto(Long userUuid, String folderName, LocalDateTime folderCreated){
         this.userUuid = userUuid;
         this.folderName = folderName;
         this.folderCreated = folderCreated;
     }
 
-    public Folders toEntity(Users userUuid){
+    public Folders toEntity(Users users){
         return Folders.builder()
-                .userUuid(userUuid)
+                .users(users)
                 .folderName(folderName)
                 .folderCreated(folderCreated)
                 .build();

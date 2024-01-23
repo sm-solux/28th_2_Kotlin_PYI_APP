@@ -32,30 +32,69 @@ public class IdeasListResponseDto {
 
     public IdeasListResponseDto(Memos entity) {
         this.memoUuid = entity.getMemoUuid();
-        this.keywordDetails = entity.getKeywords().stream()
-                .map(Keywords::getKeywordDetails)
-                .collect(Collectors.toList());
-        this.keywordCreated = entity.getKeywords().stream()
-                .map(Keywords::getKeywordCreated)
-                .collect(Collectors.toList());
-        this.todoDate = entity.getTodos().stream()
-                .map(Todos::getTodoDate)
-                .collect(Collectors.toList());
-        this.todoDetails = entity.getTodos().stream()
-                .map(Todos::getTodoDetails)
-                .collect(Collectors.toList());
-        this.organizeTitle = entity.getOrganize().stream()
-                .map(Organize::getOrganizeTitle)
-                .collect(Collectors.toList());
-        this.organizeDetails = entity.getOrganize().stream()
-                .map(Organize::getOrganizeDetails)
-                .collect(Collectors.toList());
-        this.organizeCreated = entity.getOrganize().stream()
-                .map(Organize::getOrganizeCreated)
-                .collect(Collectors.toList());
-        this.reviewTitle = entity.getReview().getReviewTitle();
-        this.reviewDetails = entity.getReview().getReviewDetails();
-        this.reviewCreated = entity.getReview().getReviewCreated();
-        this.starDetails = entity.getStar().getStarDetails();
+        if (entity.getKeywords() != null) {
+            this.keywordDetails = entity.getKeywords().stream()
+                    .map(Keywords::getKeywordDetails)
+                    .collect(Collectors.toList());
+            this.keywordCreated = entity.getKeywords().stream()
+                    .map(Keywords::getKeywordCreated)
+                    .collect(Collectors.toList());
+        }
+        if (entity.getTodos() != null) {
+            this.todoDate = entity.getTodos().stream()
+                    .map(Todos::getTodoDate)
+                    .collect(Collectors.toList());
+            this.todoDetails = entity.getTodos().stream()
+                    .map(Todos::getTodoDetails)
+                    .collect(Collectors.toList());
+        }
+        if (entity.getOrganize() != null) {
+            this.organizeTitle = entity.getOrganize().stream()
+                    .map(Organize::getOrganizeTitle)
+                    .collect(Collectors.toList());
+            this.organizeDetails = entity.getOrganize().stream()
+                    .map(Organize::getOrganizeDetails)
+                    .collect(Collectors.toList());
+            this.organizeCreated = entity.getOrganize().stream()
+                    .map(Organize::getOrganizeCreated)
+                    .collect(Collectors.toList());
+        }
+        if (entity.getReview() != null) {
+            this.reviewTitle = entity.getReview().getReviewTitle();
+            this.reviewDetails = entity.getReview().getReviewDetails();
+            this.reviewCreated = entity.getReview().getReviewCreated();
+        }
+        if (entity.getStar() != null) {
+            this.starDetails = entity.getStar().getStarDetails();
+        }
+
+
+
+//        this.memoUuid = entity.getMemoUuid();
+//        this.keywordDetails = entity.getKeywords().stream()
+//                .map(Keywords::getKeywordDetails)
+//                .collect(Collectors.toList());
+//        this.keywordCreated = entity.getKeywords().stream()
+//                .map(Keywords::getKeywordCreated)
+//                .collect(Collectors.toList());
+//        this.todoDate = entity.getTodos().stream()
+//                .map(Todos::getTodoDate)
+//                .collect(Collectors.toList());
+//        this.todoDetails = entity.getTodos().stream()
+//                .map(Todos::getTodoDetails)
+//                .collect(Collectors.toList());
+//        this.organizeTitle = entity.getOrganize().stream()
+//                .map(Organize::getOrganizeTitle)
+//                .collect(Collectors.toList());
+//        this.organizeDetails = entity.getOrganize().stream()
+//                .map(Organize::getOrganizeDetails)
+//                .collect(Collectors.toList());
+//        this.organizeCreated = entity.getOrganize().stream()
+//                .map(Organize::getOrganizeCreated)
+//                .collect(Collectors.toList());
+//        this.reviewTitle = entity.getReview().getReviewTitle();
+//        this.reviewDetails = entity.getReview().getReviewDetails();
+//        this.reviewCreated = entity.getReview().getReviewCreated();
+//        this.starDetails = entity.getStar().getStarDetails();
     }
 }

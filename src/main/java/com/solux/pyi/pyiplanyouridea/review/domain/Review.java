@@ -1,7 +1,6 @@
 package com.solux.pyi.pyiplanyouridea.review.domain;
 
 import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
-import com.solux.pyi.pyiplanyouridea.users.domain.Users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -68,14 +67,9 @@ public class Review {
     @Column(name = "review_uuid", columnDefinition = "bigint(16)", nullable = false)
     private Long reviewUuid;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_uuid", columnDefinition = "bigint(16)", nullable = false)
-//    private Users userUuid;
-
-    //@OneToOne
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memo_uuid", columnDefinition = "bigint(16)", nullable = false)
-    private Memos memoUuid;
+    private Memos memos;
 
     @Column(name = "review_title", columnDefinition = "varchar(30)", nullable = false)
     private String reviewTitle;
@@ -95,10 +89,8 @@ public class Review {
     // 다만, 생성자의 경우 지금 채워야 할 필드가 무엇인지 명확히 지정할 수가 없다.
     // 생성자에서는 매개변수의 위치를 변경해도 코드를 실행하기 전까지는 문제를 찾을 수 없다.
     // 하지만 빌더를 사용하게 되면 어느 필드에 어떤 값을 채워야 할지 명확하게 인지할 수 있다.
-    //public Review(Users userUuid, Memos memoUuid, String reviewTitle, String reviewDetails, LocalDateTime reviewCreated) {
-    public Review(Memos memoUuid, String reviewTitle, String reviewDetails, LocalDateTime reviewCreated) {
-        //this.userUuid = userUuid;
-        this.memoUuid = memoUuid;
+    public Review(Memos memos, String reviewTitle, String reviewDetails, LocalDateTime reviewCreated) {
+        this.memos = memos;
         this.reviewTitle = reviewTitle;
         this.reviewDetails = reviewDetails;
         this.reviewCreated = reviewCreated;

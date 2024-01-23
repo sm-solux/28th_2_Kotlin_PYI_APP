@@ -11,12 +11,12 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 public class KeywordsSaveRequestDto {
-    private Memos memoUuid;
+    private Long memoUuid;
     private String keywordDetails;
     private LocalDateTime keywordCreated;
 
     @Builder
-    public KeywordsSaveRequestDto(Memos memoUuid, String keywordDetails, LocalDateTime keywordCreated){
+    public KeywordsSaveRequestDto(Long memoUuid, String keywordDetails, LocalDateTime keywordCreated){
 
         this.memoUuid = memoUuid;
         this.keywordDetails = keywordDetails;
@@ -25,7 +25,7 @@ public class KeywordsSaveRequestDto {
 
     public Keywords toEntity(Memos memoUuid){
         return Keywords.builder()
-                .memoUuid(memoUuid)
+                .memos(memoUuid)
                 .keywordDetails(keywordDetails)
                 .keywordCreated(keywordCreated)
                 .build();

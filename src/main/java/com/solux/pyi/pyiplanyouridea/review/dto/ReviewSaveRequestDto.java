@@ -2,7 +2,6 @@ package com.solux.pyi.pyiplanyouridea.review.dto;
 
 import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
 import com.solux.pyi.pyiplanyouridea.review.domain.Review;
-import com.solux.pyi.pyiplanyouridea.users.domain.Users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,8 +45,7 @@ import java.time.LocalDateTime;
 // - 기본 생성자 자동 추가
 // - public Memos() {} 와 같은 효과
 public class ReviewSaveRequestDto {
-    //private Users userUuid;
-    private Memos memoUuid;
+    private Long memoUuid;
     private String reviewTitle;
     private String reviewDetails;
     private LocalDateTime reviewCreated;
@@ -59,9 +57,7 @@ public class ReviewSaveRequestDto {
     // 다만, 생성자의 경우 지금 채워야 할 필드가 무엇인지 명확히 지정할 수가 없다.
     // 생성자에서는 매개변수의 위치를 변경해도 코드를 실행하기 전까지는 문제를 찾을 수 없다.
     // 하지만 빌더를 사용하게 되면 어느 필드에 어떤 값을 채워야 할지 명확하게 인지할 수 있다.
-    //public ReviewSaveRequestDto(Users userUuid, Memos memoUuid, String reviewTitle, String reviewDetails, LocalDateTime reviewCreated) {
-    public ReviewSaveRequestDto(Memos memoUuid, String reviewTitle, String reviewDetails, LocalDateTime reviewCreated) {
-        //this.userUuid = userUuid;
+    public ReviewSaveRequestDto(Long memoUuid, String reviewTitle, String reviewDetails, LocalDateTime reviewCreated) {
         this.memoUuid = memoUuid;
         this.reviewTitle = reviewTitle;
         this.reviewDetails = reviewDetails;
@@ -70,8 +66,7 @@ public class ReviewSaveRequestDto {
 
     public Review toEntity(Memos memoUuid) {
         return Review.builder()
-                //.userUuid(userUuid)
-                .memoUuid(memoUuid)
+                .memos(memoUuid)
                 .reviewTitle(reviewTitle)
                 .reviewDetails(reviewDetails)
                 .reviewCreated(reviewCreated)

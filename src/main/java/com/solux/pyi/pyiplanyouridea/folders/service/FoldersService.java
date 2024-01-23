@@ -27,7 +27,7 @@ public class FoldersService {
     public Long update(Long id, FoldersUpdateRequestDto requestDto){
         Folders folders = foldersRepository.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
-        folders.update(requestDto.getFolder_name());
+        folders.update(requestDto.getFolderName());
         return id;
     }
 
@@ -47,9 +47,9 @@ public class FoldersService {
 
     // 폴더 리스트 조회
     @Transactional(readOnly = true)
-    public List<FoldersListResponseDto> findAllDesc(){
-        return foldersRepository.findAllDesc().stream()
-                .map(folders -> new FoldersListResponseDto(folders))
+    public List<FoldersListResponseDto> findByUsers(Users userUuid){
+        return foldersRepository.findFoldersByUsers(userUuid).stream()
+                .map(FoldersListResponseDto::new)
                 .collect(Collectors.toList());
     }
 
@@ -58,7 +58,7 @@ public class FoldersService {
     // 메인 페이지에서 전체 폴더 리스트 퀵메모 리스트 조회
     @Transactional(readOnly = true)
     public List<MainListResponseDto> getMainByUserId(Users users) {
-        return foldersRepository.findFoldersByUserUuid(users).stream()
+        return foldersRepository.findFoldersByUsers(users).stream()
                 .map(MainListResponseDto::new)
                 .collect(Collectors.toList());
     }

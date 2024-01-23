@@ -64,25 +64,25 @@ public class MemosService {
         return new MemosResponseDto(entity);
     }
 
-    // 퀵메모 리스트 전체 조회
-    @Transactional(readOnly = true)
-    public List<MemosListResponseDto> findAllDesc() {
-        return memosRepository.findAllDesc().stream()
-                .map(MemosListResponseDto::new)
-                // .map(MemosListResponseDto::new)
-                // 위 코드는 실제로 다음과 같다.
-                // .map(posts -> new MemosListResponseDto(memos))
-                // memosRespository 결과로 넘어온
-                // Memos의 Stream을 map을 통해
-                // MemosListResponseDto 변환
-                // -> List로 반환하는 메소드이다.
-                .collect(Collectors.toList());
-    }
+//    // 퀵메모 리스트 전체 조회
+//    @Transactional(readOnly = true)
+//    public List<MemosListResponseDto> findAllDesc() {
+//        return memosRepository.findAllDesc().stream()
+//                .map(MemosListResponseDto::new)
+//                // .map(MemosListResponseDto::new)
+//                // 위 코드는 실제로 다음과 같다.
+//                // .map(posts -> new MemosListResponseDto(memos))
+//                // memosRespository 결과로 넘어온
+//                // Memos의 Stream을 map을 통해
+//                // MemosListResponseDto 변환
+//                // -> List로 반환하는 메소드이다.
+//                .collect(Collectors.toList());
+//    }
 
     // 퀵메모 폴더별 리스트 조회
     @Transactional(readOnly = true)
     public List<MemosListResponseDto> findByFolder(Folders folderUuid) {
-        return memosRepository.findMemosByFolderUuid(folderUuid).stream()
+        return memosRepository.findMemosByFolders(folderUuid).stream()
                 .map(MemosListResponseDto::new)
                 .collect(Collectors.toList());
     }

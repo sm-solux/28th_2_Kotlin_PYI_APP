@@ -22,7 +22,7 @@ public class Organize {
   
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memo_uuid", columnDefinition = "bigint(16)", nullable = false)
-    private Memos memoUuid;
+    private Memos memos;
 
     @Column(name = "organize_title", columnDefinition = "varchar(30)", nullable = false)
     private String organizeTitle;
@@ -35,9 +35,9 @@ public class Organize {
     private LocalDateTime organizeCreated;
 
     @Builder
-    public Organize(Memos memoUuid, String organizeTitle, String organizeDetails, LocalDateTime organizeCreated) {
+    public Organize(Memos memos, String organizeTitle, String organizeDetails, LocalDateTime organizeCreated) {
         //this.userUuid = userUuid;
-        this.memoUuid = memoUuid;
+        this.memos = memos;
         this.organizeTitle = organizeTitle;
         this.organizeDetails = organizeDetails;
         this.organizeCreated = organizeCreated;

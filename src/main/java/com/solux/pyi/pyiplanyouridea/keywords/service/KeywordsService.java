@@ -24,7 +24,7 @@ public class KeywordsService {
     public Long update(Long id, KeywordsUpdateRequestDto requestDto){
         Keywords keywords = keywordsRepository.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
-        keywords.update(requestDto.getKeywords());
+        keywords.update(requestDto.getKeywordDetails());
         return id;
     }
 

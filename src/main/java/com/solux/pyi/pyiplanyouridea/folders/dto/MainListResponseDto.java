@@ -1,9 +1,7 @@
 package com.solux.pyi.pyiplanyouridea.folders.dto;
 
 import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
-import com.solux.pyi.pyiplanyouridea.keywords.domain.Keywords;
 import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
-import com.solux.pyi.pyiplanyouridea.users.domain.Users;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -13,12 +11,9 @@ import java.util.stream.Collectors;
 @Getter
 public class MainListResponseDto {
 
-    private Users userUuid;
-    //private List<Long> folderUuid;
+    private Long userUuid;
     private Long folderUuid;
-    //private List<String> folderName;
     private String folderName;
-    //private List<LocalDateTime> folderCreated;
     private LocalDateTime folderCreated;
     private List<Long> memoUuid;
     private List<String> memoTitle;
@@ -26,7 +21,7 @@ public class MainListResponseDto {
     private List<LocalDateTime> memoCreated;
 
     public MainListResponseDto(Folders entity) {
-        this.userUuid = entity.getUserUuid();
+        this.userUuid = entity.getUsers().getUserUuid();
         this.folderUuid = entity.getFolderUuid();
         this.folderName = entity.getFolderName();
         this.folderCreated = entity.getFolderCreated();

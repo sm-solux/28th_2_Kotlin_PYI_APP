@@ -2,7 +2,7 @@ package com.solux.pyi.pyiplanyouridea.organize.service;
 
 import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
 import com.solux.pyi.pyiplanyouridea.organize.domain.Organize;
-import com.solux.pyi.pyiplanyouridea.organize.domain.OrganizeRepository;
+import com.solux.pyi.pyiplanyouridea.organize.repository.OrganizeRepository;
 import com.solux.pyi.pyiplanyouridea.organize.dto.OrganizeResponseDto;
 import com.solux.pyi.pyiplanyouridea.organize.dto.OrganizeSaveRequestDto;
 import com.solux.pyi.pyiplanyouridea.organize.dto.OrganizeUpdateRequestDto;
@@ -24,10 +24,11 @@ public class OrganizeService {
     public Long update(Long id, OrganizeUpdateRequestDto requestDto){
         Organize organize = organizeRepository.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
-        organize.update(requestDto.getOrganize_title(), requestDto.getOrganize());
+        organize.update(requestDto.getOrganizeTitle(), requestDto.getOrganizeDetails());
         return id;
     }
 
+    @Transactional
     public OrganizeResponseDto findById(Long id){
         Organize entity = organizeRepository.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));

@@ -4,7 +4,6 @@ import com.solux.pyi.pyiplanyouridea.users.domain.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
-import java.util.UUID;
 
 // 시큐리티 회원가입
 // 시큐리티 로그인

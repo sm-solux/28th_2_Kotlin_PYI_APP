@@ -26,21 +26,21 @@ public class OrganizeController {
 
     // 자료정리 및 구체화 하나 조회
     @GetMapping("/vieworganize/{organizeUuid}") //https://planyouridea/vieworganize/{folderId}/{memoId}/{organizeId}
-    public OrganizeResponseDto findById(@PathVariable Long organize_id){
-        return organizeService.findById(organize_id);
+    public OrganizeResponseDto findById(@PathVariable Long organizeUuid){
+        return organizeService.findById(organizeUuid);
     }
 
     // 자료정리 및 구체화 하나 수정
     @PutMapping("/editorganize/{organizeUuid}") //https://planyouridea/editorganize/{folderId}/{memoId}/{organizeId}
-    public Long update(@PathVariable Long organize_id, @RequestBody OrganizeUpdateRequestDto requestDto){
-        return organizeService.update(organize_id, requestDto);
+    public Long update(@PathVariable Long organizeUuid, @RequestBody OrganizeUpdateRequestDto requestDto){
+        return organizeService.update(organizeUuid, requestDto);
     }
 
     // 자료정리 및 구체화 하나 삭제
     @DeleteMapping("/deleteorganize/{organizeUuid}") //https://planyouridea/deleteorganize/{organizeId}
-    public  Long delete(@PathVariable Long organize_id){
-        organizeService.delete(organize_id);
-        return organize_id;
+    public  Long delete(@PathVariable Long organizeUuid){
+        organizeService.delete(organizeUuid);
+        return organizeUuid;
     }
 
 

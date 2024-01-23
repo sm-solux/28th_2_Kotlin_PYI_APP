@@ -1,5 +1,8 @@
 package com.solux.pyi.pyiplanyouridea.todos.repository;
 
+import com.solux.pyi.pyiplanyouridea.todos.domain.Todos;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 
 
 // 2
@@ -30,9 +33,6 @@ package com.solux.pyi.pyiplanyouridea.todos.repository;
 // 함께 움직여야 하므로 도메인 패키지에서 함께 관리한다.
 
 // Posts 클래스로 Database를 접근하게 해줄 JpaRepository
-
-import com.solux.pyi.pyiplanyouridea.todos.domain.Todos;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TodosRepository extends JpaRepository<Todos, Long> {
 

@@ -2,9 +2,7 @@ package com.solux.pyi.pyiplanyouridea.folders.dto;
 
 import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
 import lombok.Getter;
-import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 @Getter

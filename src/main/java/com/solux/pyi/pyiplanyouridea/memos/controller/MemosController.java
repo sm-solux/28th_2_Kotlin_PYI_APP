@@ -1,12 +1,9 @@
 package com.solux.pyi.pyiplanyouridea.memos.controller;
 
 import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
-import com.solux.pyi.pyiplanyouridea.folders.dto.MainListResponseDto;
 import com.solux.pyi.pyiplanyouridea.folders.repository.FoldersRepository;
 import com.solux.pyi.pyiplanyouridea.memos.dto.*;
 import com.solux.pyi.pyiplanyouridea.memos.service.MemosService;
-import com.solux.pyi.pyiplanyouridea.users.domain.Users;
-import com.solux.pyi.pyiplanyouridea.users.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,7 +44,6 @@ public class MemosController {
 
     private final MemosService memosService;
     private final FoldersRepository foldersRepository;
-    //private final UsersRepository usersRepository;
 
     // 퀵메모 저장
     @PostMapping("/writequickmemo/{folderUuid}")
@@ -74,15 +70,6 @@ public class MemosController {
     public List<MemosListResponseDto> getMemosList(@PathVariable Folders folderUuid) {
         return memosService.findByFolder(folderUuid);
     }
-
-    /*
-    // 퀵메모 폴더별 리스트 조회
-    @GetMapping("/viewfolderquickmemolist/{folderUuid}")
-    public List<MemosListResponseDto> getMemosList(@PathVariable Long folderUuid) {
-        Folders folders = foldersRepository.getReferenceById(folderUuid);
-        return memosService.findByFolder(folders.getFolderUuid());
-    }
-    */
 
     // 퀵메모 수정
     @PutMapping("/editquickmemo/{memoUuid}")

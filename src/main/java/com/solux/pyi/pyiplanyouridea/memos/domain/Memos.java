@@ -6,7 +6,6 @@ import com.solux.pyi.pyiplanyouridea.organize.domain.Organize;
 import com.solux.pyi.pyiplanyouridea.review.domain.Review;
 import com.solux.pyi.pyiplanyouridea.star.domain.Star;
 import com.solux.pyi.pyiplanyouridea.todos.domain.Todos;
-import com.solux.pyi.pyiplanyouridea.users.domain.Users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -75,13 +74,9 @@ public class Memos {
     @Column(name = "memo_uuid", columnDefinition = "bigint(16)", nullable = false)
     private Long memoUuid;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_uuid", columnDefinition = "bigint(16)", nullable = false)
-//    private Users userUuid;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "folder_uuid", columnDefinition = "bigint(16)", nullable = false)
-    private Folders folderUuid;
+    private Folders folders;
 
     @Column(name = "memo_title", columnDefinition = "varchar(30)", nullable = false)
     private String memoTitle;
@@ -95,22 +90,20 @@ public class Memos {
 
 
 
-    ////////////////////////////////
-    @OneToMany(mappedBy = "memoUuid")
+    @OneToMany(mappedBy = "memos")
     private List<Keywords> keywords = new ArrayList<Keywords>();
 
-    @OneToMany(mappedBy = "memoUuid")
+    @OneToMany(mappedBy = "memos")
     private List<Todos> todos = new ArrayList<Todos>();
 
-    @OneToMany(mappedBy = "memoUuid")
+    @OneToMany(mappedBy = "memos")
     private List<Organize> organize = new ArrayList<Organize>();
 
-    @OneToOne(mappedBy = "memoUuid")
+    @OneToOne(mappedBy = "memos")
     private Review review;
 
-    @OneToOne(mappedBy = "memoUuid")
+    @OneToOne(mappedBy = "memos")
     private Star star;
-    ////////////////////////////////
 
 
 
@@ -122,18 +115,8 @@ public class Memos {
     // 다만, 생성자의 경우 지금 채워야 할 필드가 무엇인지 명확히 지정할 수가 없다.
     // 생성자에서는 매개변수의 위치를 변경해도 코드를 실행하기 전까지는 문제를 찾을 수 없다.
     // 하지만 빌더를 사용하게 되면 어느 필드에 어떤 값을 채워야 할지 명확하게 인지할 수 있다.
-    //public Memos(Users userUuid, Folders folderUuid, String memoTitle, String memoDetails, LocalDateTime memoCreated) {
-    /*
-    public Memos(Folders folderUuid, String memoTitle, String memoDetails, LocalDateTime memoCreated) {
-        //this.userUuid = userUuid;
-        this.folderUuid = folderUuid;
-        this.memoTitle = memoTitle;
-        this.memoDetails = memoDetails;
-        this.memoCreated = memoCreated;
-    }
-     */
-    public Memos(Folders folderUuid, String memoTitle, String memoDetails, LocalDateTime memoCreated, List<Keywords> keywords, List<Todos> todos, List<Organize> organize, Review review, Star star) {
-        this.folderUuid = folderUuid;
+    public Memos(Folders folders, String memoTitle, String memoDetails, LocalDateTime memoCreated, List<Keywords> keywords, List<Todos> todos, List<Organize> organize, Review review, Star star) {
+        this.folders = folders;
         this.memoTitle = memoTitle;
         this.memoDetails = memoDetails;
         this.memoCreated = memoCreated;
@@ -145,7 +128,6 @@ public class Memos {
     }
 
     // 퀵메모 수정
-    //public void update(Folders folderId, String memoTitle, String memoDetails) {
     public void update(String memoTitle, String memoDetails) {
         //this.folderId = folderId;
         this.memoTitle = memoTitle;

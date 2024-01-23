@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class KeywordsUpdateRequestDto {
-    private String keywords;
+    private String keywordDetails;
 
     @Builder
-    public KeywordsUpdateRequestDto(String keywords){
-        this.keywords = keywords;
+    public KeywordsUpdateRequestDto(String keywordDetails){
+        this.keywordDetails = keywordDetails;
     }
 }

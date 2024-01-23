@@ -26,9 +26,9 @@ public class FoldersController {
     }
 
     // 카테고리에서 폴더 리스트 조회
-    @GetMapping("/category")
-    public List<FoldersListResponseDto> getCategoryFoldersList(){
-        return foldersService.findAllDesc();
+    @GetMapping("/category/{userUuid}")
+    public List<FoldersListResponseDto> getCategoryFoldersList(@PathVariable Users userUuid){
+        return foldersService.findByUsers(userUuid);
     }
 
     // 메인 페이지에서 전체 폴더 리스트 퀵메모 리스트 조회

@@ -1,6 +1,5 @@
 package com.solux.pyi.pyiplanyouridea.review.dto;
 
-import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
 import com.solux.pyi.pyiplanyouridea.review.domain.Review;
 import lombok.Getter;
 
@@ -47,13 +46,13 @@ public class ReviewResponseDto {
 // 필요하진 않으므로 Dto는 Entity를 받아 처리한다.
 
     private Long reviewUuid;
-    private Memos memoUuid;
+    private Long memoUuid;
     private String reviewTitle;
     private String reviewDetails;
 
     public ReviewResponseDto(Review entity) {
         this.reviewUuid = entity.getReviewUuid();
-        this.memoUuid = entity.getMemoUuid();
+        this.memoUuid = entity.getMemos().getMemoUuid();
         this.reviewTitle = entity.getReviewTitle();
         this.reviewDetails = entity.getReviewDetails();
     }

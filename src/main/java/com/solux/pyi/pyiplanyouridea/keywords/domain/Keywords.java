@@ -22,7 +22,7 @@ public class Keywords {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memo_uuid", columnDefinition = "bigint(16)", nullable = false)
-    private Memos memoUuid;
+    private Memos memos;
 
     @Column(name = "keyword_details", columnDefinition = "varchar(30)", nullable = false)
     private String keywordDetails;
@@ -32,8 +32,8 @@ public class Keywords {
     private LocalDateTime keywordCreated;
 
     @Builder
-    public Keywords(Memos memoUuid, String keywordDetails, LocalDateTime keywordCreated) {
-        this.memoUuid = memoUuid;
+    public Keywords(Memos memos, String keywordDetails, LocalDateTime keywordCreated) {
+        this.memos = memos;
         this.keywordDetails = keywordDetails;
         this.keywordCreated = keywordCreated;
     }

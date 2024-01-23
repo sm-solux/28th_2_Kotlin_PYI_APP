@@ -5,10 +5,6 @@ import com.solux.pyi.pyiplanyouridea.keywords.dto.KeywordsUpdateRequestDto;
 import com.solux.pyi.pyiplanyouridea.keywords.service.KeywordsService;
 import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
 import com.solux.pyi.pyiplanyouridea.memos.repository.MemosRepository;
-import com.solux.pyi.pyiplanyouridea.organize.dto.OrganizeSaveRequestDto;
-import com.solux.pyi.pyiplanyouridea.organize.dto.OrganizeUpdateRequestDto;
-import com.solux.pyi.pyiplanyouridea.organize.service.OrganizeService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,4 +33,5 @@ public class KeywordsController {
         keywordsService.delete(keywordUuid);
         return keywordUuid;
     }
+
 }

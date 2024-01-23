@@ -12,6 +12,6 @@ public interface FoldersRepository extends JpaRepository<Folders, Long> {
     @Query("SELECT f FROM Folders f")
     List<Folders> findAllDesc();
 
-    List<Folders> findFoldersByUserUuid(@Param("userUuid") Users users);
+    List<Folders> findFoldersByUsers(@Param("userUuid") Users users);
 
 }

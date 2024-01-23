@@ -1,6 +1,5 @@
 package com.solux.pyi.pyiplanyouridea.memos.dto;
 
-import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
 import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
 import lombok.Getter;
 
@@ -45,14 +44,15 @@ public class MemosResponseDto {
 // 필요하진 않으므로 Dto는 Entity를 받아 처리한다.
 
     private Long memoUuid;
-    private Folders folderUuid;
+    //private Folders folderUuid;
+    private Long folderUuid;
     private String memoTitle;
     private String memoDetails;
     private LocalDateTime memoCreated;
 
     public MemosResponseDto(Memos entity) {
         this.memoUuid = entity.getMemoUuid();
-        this.folderUuid = entity.getFolderUuid();
+        this.folderUuid = entity.getFolders().getFolderUuid();
         this.memoTitle = entity.getMemoTitle();
         this.memoDetails = entity.getMemoDetails();
         this.memoCreated = entity.getMemoCreated();
