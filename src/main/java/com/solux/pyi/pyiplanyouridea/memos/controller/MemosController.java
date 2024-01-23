@@ -1,9 +1,12 @@
 package com.solux.pyi.pyiplanyouridea.memos.controller;
 
 import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
+import com.solux.pyi.pyiplanyouridea.folders.dto.MainListResponseDto;
 import com.solux.pyi.pyiplanyouridea.folders.repository.FoldersRepository;
 import com.solux.pyi.pyiplanyouridea.memos.dto.*;
 import com.solux.pyi.pyiplanyouridea.memos.service.MemosService;
+import com.solux.pyi.pyiplanyouridea.users.domain.Users;
+import com.solux.pyi.pyiplanyouridea.users.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +47,7 @@ public class MemosController {
 
     private final MemosService memosService;
     private final FoldersRepository foldersRepository;
+    //private final UsersRepository usersRepository;
 
     // 퀵메모 저장
     @PostMapping("/writequickmemo/{folderUuid}")
@@ -59,8 +63,9 @@ public class MemosController {
     }
 
 //    // 퀵메모 리스트 전체 조회
-//    @GetMapping("/main")
-//    public List<MemosListResponseDto> getAllMemosList() {
+//    @GetMapping("/main/{userUuid}")
+//    public MainListResponseDto getAllMemosList(@PathVariable Long userUuid) {
+//        Users users = usersRepository.getReferenceById(userUuid);
 //        return memosService.findAllDesc();
 //    }
 
@@ -98,5 +103,11 @@ public class MemosController {
     @GetMapping("/ideas/{memoUuid}")
     public IdeasListResponseDto getIdeasList(@PathVariable Long memoUuid) {
         return memosService.getIdeasById(memoUuid);
+    }
+
+    // 작성완료 후 페이지 조회
+    @GetMapping("/summary/{memoUuid}")
+    public SummaryListResponseDto getSummaryList(@PathVariable Long memoUuid) {
+        return memosService.getSummaryById(memoUuid);
     }
 }

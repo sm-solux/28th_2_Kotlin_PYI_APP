@@ -7,14 +7,14 @@ import java.time.LocalDateTime;
 
 public class KeywordsResponseDto {
     private Memos memoUuid;
-    private Long keywords_id;
-    private String keywords;
+    private Long keywordsUuid;
+    private String keywordDetails;
     private LocalDateTime keywordCreated;
 
     public KeywordsResponseDto(Keywords entity){
-        this.keywords_id = entity.getKeyword_id();
+        this.keywordsUuid = entity.getKeywordUuid();
         this.memoUuid = entity.getMemoUuid();
-        this.keywords = entity.getKeyword();
+        this.keywordDetails = entity.getKeywordDetails();
         this.keywordCreated = entity.getKeywordCreated();
     }
 }

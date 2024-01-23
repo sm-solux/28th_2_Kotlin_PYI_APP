@@ -17,7 +17,7 @@ public class OrganizeService {
 
     @Transactional
     public Long save(Memos memoUuid, OrganizeSaveRequestDto requestDto){
-        return organizeRepository.save(requestDto.toEntity(memoUuid)).getOrganize_id();
+        return organizeRepository.save(requestDto.toEntity(memoUuid)).getOrganizeUuid();
     }
 
     @Transactional

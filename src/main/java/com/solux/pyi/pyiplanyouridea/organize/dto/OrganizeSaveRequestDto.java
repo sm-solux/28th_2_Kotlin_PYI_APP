@@ -12,15 +12,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class OrganizeSaveRequestDto {
 
-    private String organize_title;
     private Memos memoUuid;
-    private String organize;
+    private String organizeTitle;
+    private String organizeDetails;
     private LocalDateTime organizeCreated;
 
     @Builder
-    public OrganizeSaveRequestDto(Memos memoUuid, String title, String content, LocalDateTime organizeCreated){
-        this.organize_title = title;
-        this.organize = content;
+    public OrganizeSaveRequestDto(Memos memoUuid, String organizeTitle, String organizeDetails, LocalDateTime organizeCreated){
+        this.organizeTitle = organizeTitle;
+        this.organizeDetails = organizeDetails;
         this.memoUuid = memoUuid;
         this.organizeCreated = organizeCreated;
     }
@@ -28,8 +28,8 @@ public class OrganizeSaveRequestDto {
     public Organize toEntity(Memos memoUuid){
         return Organize.builder()
                 .memoUuid(memoUuid)
-                .title(organize_title)
-                .content(organize)
+                .organizeTitle(organizeTitle)
+                .organizeDetails(organizeDetails)
                 .organizeCreated(organizeCreated)
                 .build();
     }

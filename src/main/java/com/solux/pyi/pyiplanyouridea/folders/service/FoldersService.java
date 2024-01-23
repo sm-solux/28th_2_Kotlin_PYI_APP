@@ -1,11 +1,8 @@
 package com.solux.pyi.pyiplanyouridea.folders.service;
 
 import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
+import com.solux.pyi.pyiplanyouridea.folders.dto.*;
 import com.solux.pyi.pyiplanyouridea.folders.repository.FoldersRepository;
-import com.solux.pyi.pyiplanyouridea.folders.dto.FoldersListResponseDto;
-import com.solux.pyi.pyiplanyouridea.folders.dto.FoldersResponseDto;
-import com.solux.pyi.pyiplanyouridea.folders.dto.FoldersSaveRequestDto;
-import com.solux.pyi.pyiplanyouridea.folders.dto.FoldersUpdateRequestDto;
 import com.solux.pyi.pyiplanyouridea.users.domain.Users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -54,4 +51,13 @@ public class FoldersService {
                 .map(folders -> new FoldersListResponseDto(folders))
                 .collect(Collectors.toList());
     }
+
+
+
+//    // 메인 페이지에서 전체 폴더 리스트 퀵메모 리스트 조회
+//    @Transactional(readOnly = true)
+//    public MainListResponseDto getMainByUserId(Long userUuid) {
+//        Folders entity = foldersRepository.findById(userUuid)
+//    }
+
 }

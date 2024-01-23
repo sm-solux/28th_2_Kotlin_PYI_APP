@@ -38,14 +38,14 @@ import java.util.List;
 // Posts 클래스로 Database를 접근하게 해줄 JpaRepository
 public interface MemosRepository extends JpaRepository<Memos, Long> {
 
-//    // 퀵메모 리스트 전체 조회
-//    @Query("select p from Memos p order by p.memoId desc ")
-//    // SpringDataJpa에서 제공하지 않는 메소드는
-//    // 위처럼 @Query를 사용해 쿼리로 작성해도 된다.
-//    // 실제로 위 코드는 SpringDataJpa에서 제공하는
-//    // 기본 메소드만으로 해결할 수 있다.
-//    // 다만 @Query가 훨씬 가독성이 좋으니 선택해서 사용하면 된다.
-//    List<Memos> findAllDesc();
+    // 퀵메모 리스트 전체 조회
+    @Query("SELECT m FROM Memos m")
+    // SpringDataJpa에서 제공하지 않는 메소드는
+    // 위처럼 @Query를 사용해 쿼리로 작성해도 된다.
+    // 실제로 위 코드는 SpringDataJpa에서 제공하는
+    // 기본 메소드만으로 해결할 수 있다.
+    // 다만 @Query가 훨씬 가독성이 좋으니 선택해서 사용하면 된다.
+    List<Memos> findAllDesc();
 
     // folderUuid에 해당하는 퀵메모 목록 조회
     List<Memos> findMemosByFolderUuid(@Param("folderUuid") Folders folderId);

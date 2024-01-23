@@ -9,17 +9,17 @@ import java.time.LocalDateTime;
 @Getter
 public class OrganizeResponseDto {
 
-    private Long organize_id;
+    private Long organizeUuid;
     private Memos memoUuid;
-    private String organize_title;
-    private String organize;
+    private String organizeTitle;
+    private String organizeDetails;
     private LocalDateTime organizeCreated;
 
     public OrganizeResponseDto(Organize entity){
-        this.organize_id = entity.getOrganize_id();
+        this.organizeUuid = entity.getOrganizeUuid();
         this.memoUuid = entity.getMemoUuid();
-        this.organize_title = entity.getOrganize_title();
-        this.organize = entity.getOrganize();
+        this.organizeTitle = entity.getOrganizeTitle();
+        this.organizeDetails = entity.getOrganizeDetails();
         this.organizeCreated = entity.getOrganizeCreated();
     }
 }

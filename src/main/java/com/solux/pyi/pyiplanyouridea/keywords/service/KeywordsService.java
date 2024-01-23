@@ -17,7 +17,7 @@ public class KeywordsService {
 
     @Transactional
     public Long save(Memos memoUuid, KeywordsSaveRequestDto requestDto){
-        return keywordsRepository.save(requestDto.toEntity(memoUuid)).getKeyword_id();
+        return keywordsRepository.save(requestDto.toEntity(memoUuid)).getKeywordUuid();
     }
 
     @Transactional
