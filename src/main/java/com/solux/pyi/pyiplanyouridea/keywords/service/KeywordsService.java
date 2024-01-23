@@ -1,7 +1,7 @@
 package com.solux.pyi.pyiplanyouridea.keywords.service;
 
 import com.solux.pyi.pyiplanyouridea.keywords.domain.Keywords;
-import com.solux.pyi.pyiplanyouridea.keywords.domain.KeywordsRepository;
+import com.solux.pyi.pyiplanyouridea.keywords.repository.KeywordsRepository;
 import com.solux.pyi.pyiplanyouridea.keywords.dto.KeywordsResponseDto;
 import com.solux.pyi.pyiplanyouridea.keywords.dto.KeywordsSaveRequestDto;
 import com.solux.pyi.pyiplanyouridea.keywords.dto.KeywordsUpdateRequestDto;

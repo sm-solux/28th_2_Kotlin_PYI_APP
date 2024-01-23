@@ -5,38 +5,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-/*import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Getter
-@NoArgsConstructor
-public class Folders {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long folder_id;
-
-    @Column(nullable = false)
-    private String folder_name;
-
-    @Builder
-    public Folders(String folder_name){ this.folder_name = folder_name; }
-
-    public void update(String folder_name){
-        this.folder_name = folder_name;
-    }
-}*/
 @Getter
 @NoArgsConstructor
 @Entity

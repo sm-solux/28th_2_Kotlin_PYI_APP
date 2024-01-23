@@ -1,5 +1,6 @@
-package com.solux.pyi.pyiplanyouridea.folders.domain;
+package com.solux.pyi.pyiplanyouridea.folders.repository;
 
+import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
