@@ -31,6 +31,7 @@ public class FoldersService {
         return id;
     }
 
+    @Transactional
     public FoldersResponseDto findById(Long id){
         Folders entity = foldersRepository.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
@@ -54,10 +55,12 @@ public class FoldersService {
 
 
 
-//    // 메인 페이지에서 전체 폴더 리스트 퀵메모 리스트 조회
-//    @Transactional(readOnly = true)
-//    public MainListResponseDto getMainByUserId(Long userUuid) {
-//        Folders entity = foldersRepository.findById(userUuid)
-//    }
+    // 메인 페이지에서 전체 폴더 리스트 퀵메모 리스트 조회
+    @Transactional(readOnly = true)
+    public List<MainListResponseDto> getMainByUserId(Users users) {
+        return foldersRepository.findFoldersByUserUuid(users).stream()
+                .map(MainListResponseDto::new)
+                .collect(Collectors.toList());
+    }
 
 }

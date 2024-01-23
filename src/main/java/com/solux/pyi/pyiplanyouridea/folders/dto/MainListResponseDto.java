@@ -4,11 +4,13 @@ import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
 import com.solux.pyi.pyiplanyouridea.keywords.domain.Keywords;
 import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
 import com.solux.pyi.pyiplanyouridea.users.domain.Users;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
 public class MainListResponseDto {
 
     private Users userUuid;

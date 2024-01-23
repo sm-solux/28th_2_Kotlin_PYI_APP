@@ -64,27 +64,6 @@ public class MemosService {
         return new MemosResponseDto(entity);
     }
 
-//    // 퀵메모 리스트 전체 조회
-//    @Transactional(readOnly = true)
-//    // findAllDesc 메소드의 트랜잭션 어노테이션(@Transactional)에
-//    // 옵션이 하나 추가되었다.
-//    // (readOnly = true)를 주면 트랜잭션 범위는 유지하되,
-//    // 조회 기능만 남겨두어 조회 속도가 개선되기 때문에
-//    // 등록, 수정, 삭제 기능이 전혀 없는 서비스 메소드에서
-//    // 사용하는 것을 추천한다.
-//    public List<MemosListResponseDto> findAllDesc() {
-//        return memosRepository.findAllDesc().stream()
-//                .map(MemosListResponseDto::new)
-//                // .map(MemosListResponseDto::new)
-//                // 위 코드는 실제로 다음과 같다.
-//                // .map(posts -> new MemosListResponseDto(memos))
-//                // memosRespository 결과로 넘어온
-//                // Memos의 Stream을 map을 통해
-//                // MemosListResponseDto 변환
-//                // -> List로 반환하는 메소드이다.
-//                .collect(Collectors.toList());
-//    }
-
     // 퀵메모 리스트 전체 조회
     @Transactional(readOnly = true)
     public List<MemosListResponseDto> findAllDesc() {
@@ -107,16 +86,6 @@ public class MemosService {
                 .map(MemosListResponseDto::new)
                 .collect(Collectors.toList());
     }
-
-    /*
-    // 퀵메모 폴더별 리스트 조회
-    @Transactional(readOnly = true)
-    public List<MemosListResponseDto> findByFolder(Long folderUuid) {
-        return memosRepository.findMemosByFolderUuid(folderUuid).stream()
-                .map(MemosListResponseDto::new)
-                .collect(Collectors.toList());
-    }
-     */
 
     // 퀵메모 수정
     @Transactional
