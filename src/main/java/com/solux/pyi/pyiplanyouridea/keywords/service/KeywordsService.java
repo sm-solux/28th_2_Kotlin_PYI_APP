@@ -5,6 +5,7 @@ import com.solux.pyi.pyiplanyouridea.keywords.domain.KeywordsRepository;
 import com.solux.pyi.pyiplanyouridea.keywords.dto.KeywordsResponseDto;
 import com.solux.pyi.pyiplanyouridea.keywords.dto.KeywordsSaveRequestDto;
 import com.solux.pyi.pyiplanyouridea.keywords.dto.KeywordsUpdateRequestDto;
+import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,8 +16,8 @@ public class KeywordsService {
     private final KeywordsRepository keywordsRepository;
 
     @Transactional
-    public Long save(KeywordsSaveRequestDto requestDto){
-        return keywordsRepository.save(requestDto.toEntity()).getKeyword_id();
+    public Long save(Memos memoUuid, KeywordsSaveRequestDto requestDto){
+        return keywordsRepository.save(requestDto.toEntity(memoUuid)).getKeyword_id();
     }
 
     @Transactional
