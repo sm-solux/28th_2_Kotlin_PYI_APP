@@ -1,7 +1,6 @@
 package com.solux.pyi.pyiplanyouridea.folders.domain;
 
 import com.solux.pyi.pyiplanyouridea.users.domain.Users;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -16,6 +15,7 @@ import java.time.LocalDateTime;
 public class Folders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name = "folder_uuid", columnDefinition = "bigint(16)", nullable = false)
     private Long folderUuid;
 
@@ -40,4 +40,5 @@ public class Folders {
     public void update(String folderName){
         this.folderName = folderName;
     }
+  
 }
