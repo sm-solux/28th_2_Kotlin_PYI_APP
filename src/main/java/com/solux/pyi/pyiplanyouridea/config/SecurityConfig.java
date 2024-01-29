@@ -8,8 +8,10 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsUtils;
 
 
 // 시큐리티 회원가입
@@ -71,6 +73,44 @@ public class SecurityConfig {
 
         //csrfConfig.disable()
         http
+                // Request
+                .authorizeRequests()
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+//                .antMatchers(
+//                        "/api/login", "/api/register"
+//                ).permitAll()
+//                .anyRequest().hasAnyRole("USER")
+                .and()
+                // 사용하지 않는 필터
+                .formLogin()
+                .disable()
+                .csrf()
+                .disable()
+                .headers()
+                .disable()
+                .httpBasic()
+                .disable()
+                .rememberMe()
+                .disable()
+                .logout()
+                .disable()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//                .and()
+        // 인증/인가 실패 Response
+//                .exceptionHandling()
+//                .authenticationEntryPoint(authenticationEntryPoint(objectMapper()))
+//                .accessDeniedHandler(accessDeniedHandler(objectMapper()))
+//                .and()
+        // Redis Session
+//                .addFilterBefore(userAuthenticationFilter(),
+//                        UsernamePasswordAuthenticationFilter.class)
+        // CORS
+//                .cors().configurationSource(corsConfigurationSource());
+
+
+
+                /*
                 .csrf(AbstractHttpConfigurer::disable
                 )
                 // protected void configure(HttpSecurity http) 함수 내부에 권한 설정법
@@ -140,6 +180,8 @@ public class SecurityConfig {
 //                        // PrincipalOauth2UserService.java의 loadUser 함수의 매개변수 userRequest에 리턴된다.
 
                 );
+
+                 */
 
         return http.build();
 

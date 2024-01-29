@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class IdeasListResponseDto {
 
     private Long memoUuid;
-    //private List<Keywords> keywords;
+    private String memoTitle;
     private List<String> keywordDetails;
     private List<LocalDateTime> keywordCreated;
     private List<LocalDateTime> todoDate;
@@ -32,6 +32,7 @@ public class IdeasListResponseDto {
 
     public IdeasListResponseDto(Memos entity) {
         this.memoUuid = entity.getMemoUuid();
+        this.memoTitle = entity.getMemoTitle();
         if (entity.getKeywords() != null) {
             this.keywordDetails = entity.getKeywords().stream()
                     .map(Keywords::getKeywordDetails)
