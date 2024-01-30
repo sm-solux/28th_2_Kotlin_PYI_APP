@@ -2,15 +2,35 @@ package com.solux.pyi.pyiplanyouridea.folders.dto;
 
 import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
 import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
+import com.solux.pyi.pyiplanyouridea.memos.dto.MemoDto;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
+@Setter
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class MainListResponseDto {
+    private Long userUuid;
+    private List<FolderDto> folders;
+    private List<MemoDto> memos;
 
+    public MainListResponseDto(Folders entity) {
+        this.userUuid = entity.getUsers().getUserUuid();
+        this.folders = Arrays.asList(new FolderDto(entity.getFolderUuid(), entity.getFolderName(), entity.getFolderCreated()));
+        this.memos = entity.getMemos().stream()
+                .map(memo -> new MemoDto(memo.getMemoUuid(), memo.getMemoTitle(), memo.getMemoDetails(), memo.getMemoCreated()))
+                .collect(Collectors.toList());
+    }
+
+    /*
     private Long userUuid;
     private Long folderUuid;
     private String folderName;
@@ -38,5 +58,7 @@ public class MainListResponseDto {
                 .map(Memos::getMemoCreated)
                 .collect(Collectors.toList());
     }
+
+     */
 
 }

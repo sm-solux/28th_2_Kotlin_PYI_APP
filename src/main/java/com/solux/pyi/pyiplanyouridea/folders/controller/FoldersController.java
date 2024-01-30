@@ -1,9 +1,6 @@
 package com.solux.pyi.pyiplanyouridea.folders.controller;
 
-import com.solux.pyi.pyiplanyouridea.folders.dto.FoldersListResponseDto;
-import com.solux.pyi.pyiplanyouridea.folders.dto.FoldersSaveRequestDto;
-import com.solux.pyi.pyiplanyouridea.folders.dto.FoldersUpdateRequestDto;
-import com.solux.pyi.pyiplanyouridea.folders.dto.MainListResponseDto;
+import com.solux.pyi.pyiplanyouridea.folders.dto.*;
 import com.solux.pyi.pyiplanyouridea.folders.service.FoldersService;
 import com.solux.pyi.pyiplanyouridea.users.domain.Users;
 import com.solux.pyi.pyiplanyouridea.users.repository.UsersRepository;
