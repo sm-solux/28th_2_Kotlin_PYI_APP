@@ -46,4 +46,5 @@ public class FoldersController {
         foldersService.delete(folderUuid);
         return folderUuid;
     }
+
 }

@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+// 메인 페이지에서 전체 폴더 리스트 퀵메모 리스트 조회
 @Getter
 @Setter
 @NoArgsConstructor

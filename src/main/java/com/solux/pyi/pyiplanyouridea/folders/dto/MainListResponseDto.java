@@ -1,18 +1,15 @@
 package com.solux.pyi.pyiplanyouridea.folders.dto;
 
 import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
-import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
 import com.solux.pyi.pyiplanyouridea.memos.dto.MemoDto;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// 메인 페이지에서 전체 폴더 리스트 퀵메모 리스트 조회
 @Getter
 @Setter
 //@NoArgsConstructor
