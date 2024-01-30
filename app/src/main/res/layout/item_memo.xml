@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_memo"
+    android:background="#E2E2E2"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="13dp"
+    android:layout_marginStart="13dp"
+    android:layout_width="380dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="15dp"
+    android:paddingVertical="20dp">
+
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1월 1일" />
+
+    <Button
+        android:id="@+id/write_btn"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:background="#E2E2E2"
+        android:text="글제목"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="주기능 - 공부기록훃(계획 체크 후 퍼션페이지로....)"
+        android:layout_marginTop="5dp"/>
+</LinearLayout>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <!-- 위에서 아래로 바 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:background="#F08080"
+        android:layout_below="@+id/titleEditText" />
+
+
+    <!-- 뒤로가기 버튼 -->
+    <ImageButton
+        android:id="@+id/backButton"
+        android:contentDescription="뒤로가기"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/back"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <!-- 제목 입력 칸 -->
+    <EditText
+        android:id="@+id/titleEditText"
+        android:layout_width="259dp"
+        android:layout_height="47dp"
+        android:layout_toEndOf="@+id/backButton"
+        android:layout_toRightOf="@+id/backButton"
+        android:hint="제목"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- 수정 버튼 -->
+    <ImageButton
+        android:id="@+id/editButton"
+        android:contentDescription="수정버튼"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/pen9"
+        android:layout_marginTop="1dp"
+        android:layout_toLeftOf="@+id/deleteButton"
+        android:layout_toStartOf="@+id/deleteButton" />
+
+    <!-- 삭제 버튼 -->
+    <ImageButton
+        android:id="@+id/deleteButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/trash"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="삭제"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" />
+
+
+
+    <!-- 메모장 -->
+    <EditText
+        android:id="@+id/contentEditText"
+        android:layout_width="match_parent"
+        android:layout_height="545dp"
+        android:layout_below="@+id/titleEditText"
+        android:layout_marginTop="51dp"
+        android:gravity="top"
+        android:hint="메모를 입력하세요" />
+
+    <!-- 아래서 위로 높이 바 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="87dp"
+        android:layout_below="@+id/contentEditText"
+        android:background="#F08080" />
+
+</RelativeLayout>

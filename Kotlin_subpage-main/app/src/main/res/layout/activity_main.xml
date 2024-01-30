@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="63dp">
+        <!-- 뒤로가기 버튼 -->
+        <ImageButton
+            android:id="@+id/backButton"
+            android:contentDescription="뒤로가기"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/back"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true" />
+        <TextView
+            android:text="아이디어 구체화 및 실현"
+            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:gravity="left"
+            android:background="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:background="#5F5050"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수정 날짜 순"
+            android:textSize="15dp"
+            android:textColor="#FFFFFF"
+            android:padding="19dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="#D9D9D9"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="#D9D9D9"
+            android:paddingTop="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <!-- 여기에 박스와 텍스트를 추가 -->
+            <LinearLayout
+                android:layout_width="350dp"
+                android:layout_height="103dp"
+                android:background="@drawable/custom_background"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:elevation="15dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="초안: 11월 19일에 작성된 메모"
+
+                    android:textSize="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="지식재산권 숏폼 아이디어 공모전"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="15dp"/> <!-- 이 부분에서 텍스트 색상을 지정할 수 있습니다 -->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="지식재산권, 저작권, 특허권, 실용신안권...
+사례정리, 핵심용어 정의 찾기, 영상 콘티 및 대본"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="40dp"
+            android:background="#000000"/>
+
+
+        <Button
+            android:id="@+id/myButton"
+            android:layout_width="219dp"
+            android:layout_height="47dp"
+            android:background="@drawable/custom_background"
+
+            android:text="아이디어 구체화 및 실현"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:padding="10dp"
+            />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+
+    </LinearLayout>
+</LinearLayout>

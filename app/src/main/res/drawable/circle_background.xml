@@ -1,0 +1,17 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 바깥쪽 원 -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#D9D9D9"/> <!-- 바깥쪽 원의 배경색 -->
+        </shape>
+    </item>
+
+    <!-- 안쪽 원 -->
+    <item android:bottom="50dp" android:left="50dp" android:right="50dp" android:top="50dp">
+        <shape android:shape="oval">
+            <solid android:color="#5F5050"/> <!-- 안쪽 원의 배경색 -->
+        </shape>
+    </item>
+
+</layer-list>

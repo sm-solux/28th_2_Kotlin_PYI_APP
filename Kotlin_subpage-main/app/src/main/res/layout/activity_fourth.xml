@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <!-- 위에서 아래로 바 -->
+    <View
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:background="#F08080"
+        android:layout_below="@+id/titleEditText" />
+
+
+
+    <!-- 뒤로가기 버튼 -->
+    <ImageButton
+        android:id="@+id/backButton"
+        android:contentDescription="뒤로가기"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/back"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <!-- 제목 입력 칸 -->
+    <EditText
+        android:id="@+id/titleEditText"
+        android:layout_width="259dp"
+        android:layout_height="47dp"
+        android:layout_toEndOf="@+id/backButton"
+        android:layout_toRightOf="@+id/backButton"
+        android:hint="결과물 기록 및 평가"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- 수정 버튼 -->
+    <ImageButton
+        android:id="@+id/editButton"
+        android:contentDescription="수정버튼"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/pen9"
+        android:layout_marginTop="1dp"
+        android:layout_toLeftOf="@+id/deleteButton"
+        android:layout_toStartOf="@+id/deleteButton" />
+
+    <!-- 삭제 버튼 -->
+    <ImageButton
+        android:id="@+id/deleteButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/trash"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="삭제"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" />
+
+
+
+
+
+    <!-- 메모장 -->
+    <EditText
+        android:id="@+id/contentEditText"
+        android:layout_width="match_parent"
+        android:layout_height="390dp"
+        android:layout_below="@+id/imageText"
+        android:gravity="top"
+        android:hint="메모를 입력하세요" />
+
+
+    <LinearLayout
+        android:id="@+id/addImagePage"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_below="@id/topBar">
+        <!-- 이미지 추가 버튼 1 -->
+        <ImageButton
+            android:id="@+id/attachImageButton1"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="17dp"
+            android:layout_below="@+id/titleEditText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/addimage"
+            android:contentDescription="이미지 첨부 버튼 1"
+            android:onClick="onAttachImageClick" />
+
+        <!-- 이미지 추가 버튼 2 -->
+        <ImageButton
+            android:id="@+id/attachImageButton2"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/attachImageButton1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/addimage"
+            android:contentDescription="이미지 첨부 버튼 2"
+
+            android:onClick="onAttachImageClick" />
+
+        <!-- 이미지 추가 버튼 3 -->
+        <ImageButton
+            android:id="@+id/attachImageButton3"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/attachImageButton2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/addimage"
+            android:contentDescription="이미지 첨부 버튼 3"
+
+            android:onClick="onAttachImageClick" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/imageText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addImagePage"
+        android:gravity="center">
+        <!-- 텍스트 추가 -->
+        <TextView
+            android:id="@+id/textBelowButtons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="최종 결과물 이미지"
+            android:textSize="16sp"
+            android:textColor="@android:color/darker_gray"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="87dp"
+        android:layout_below="@+id/contentEditText"
+        android:background="#F08080" />
+
+</RelativeLayout>
