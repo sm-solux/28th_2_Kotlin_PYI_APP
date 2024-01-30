@@ -47,7 +47,7 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final MemosRepository memosRepository;
 
-    // 결과물 기록 및 평가 하나 저장
+    // 결과물 기록 및 평가 하나 생성
     @PostMapping("/createreview/{memoUuid}")
     public Long save(@PathVariable Long memoUuid, @RequestBody ReviewSaveRequestDto requestDto) {
         Memos memos = memosRepository.getReferenceById(memoUuid);

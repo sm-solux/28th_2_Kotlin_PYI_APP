@@ -15,21 +15,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class FolderDto {
 
-    /*
-    private Long folderUuid;
-    private String folderName;
-    private LocalDateTime folderCreated;
-
-    public FolderDto(Folders entity) {
-        this.folderUuid = entity.getFolderUuid();
-        this.folderName = entity.getFolderName();
-        this.folderCreated = entity.getFolderCreated();
-    }
-
-     */
-
-
-
     private Long folderUuid;
     private String folderName;
     private LocalDateTime folderCreated;

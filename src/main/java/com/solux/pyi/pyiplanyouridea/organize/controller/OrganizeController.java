@@ -16,7 +16,6 @@ public class OrganizeController {
     private final OrganizeService organizeService;
     private final MemosRepository memosRepository;
 
-
     // 자료정리 및 구체화 하나 생성
     @PostMapping("/createorganize/{memoUuid}") //https://planyouridea/createorganize/{folderId}/{memoId}
     public Long save(@PathVariable Long memoUuid, @RequestBody OrganizeSaveRequestDto requestDto){
@@ -42,6 +41,5 @@ public class OrganizeController {
         organizeService.delete(organizeUuid);
         return organizeUuid;
     }
-
 
 }

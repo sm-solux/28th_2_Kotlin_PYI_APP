@@ -45,14 +45,14 @@ public class MemosController {
     private final MemosService memosService;
     private final FoldersRepository foldersRepository;
 
-    // 퀵메모 저장
+    // 퀵메모 하나 작성
     @PostMapping("/writequickmemo/{folderUuid}")
     public Long save(@PathVariable Long folderUuid, @RequestBody MemosSaveRequestDto requestDto) {
         Folders folders = foldersRepository.getReferenceById(folderUuid);
         return memosService.save(folders, requestDto);
     }
 
-    // 퀵메모 조회
+    // 퀵메모 하나 조회
     @GetMapping("/viewquickmemo/{memoUuid}")
     public MemosResponseDto findById(@PathVariable Long memoUuid) {
         return memosService.findById(memoUuid);
@@ -71,13 +71,13 @@ public class MemosController {
         return memosService.findByFolder(folderUuid);
     }
 
-    // 퀵메모 수정
+    // 퀵메모 하나 수정
     @PutMapping("/editquickmemo/{memoUuid}")
     public Long update(@PathVariable Long memoUuid, @RequestBody MemosUpdateRequestDto requestDto) {
         return memosService.update(memoUuid, requestDto);
     }
 
-    // 퀵메모 삭제
+    // 퀵메모 하나 삭제
     @DeleteMapping("/deletequickmemo/{memoUuid}")
     public Long delete(@PathVariable Long memoUuid) {
         memosService.delete(memoUuid);
@@ -92,9 +92,10 @@ public class MemosController {
         return memosService.getIdeasById(memoUuid);
     }
 
-    // 작성완료 후 페이지 조회
+    // 퍼즐버튼 클릭 - 작성완료 후 페이지 조회
     @GetMapping("/summary/{memoUuid}")
     public SummaryListResponseDto getSummaryList(@PathVariable Long memoUuid) {
         return memosService.getSummaryById(memoUuid);
     }
+
 }
