@@ -9,6 +9,12 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 //import kotlinx.coroutines.NonCancellable.message
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -40,17 +46,40 @@ class IdeaPageActivity : AppCompatActivity() {
         //json읽기 테스트 버튼을 찾습니다.
         val testButton: Button = findViewById(R.id.button2)
 
-        //테스트 버튼 클릭시 ideas의 json 데이터를 Toast로 앱에 출력합니다.
         testButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
-                // ideas가 null이 아닌 경우에만 실행
-                ideas?.forEach { idea ->
-                    // 읽어들인 JSON 데이터 활용하여 메시지 생성
-                    val message = "Memos: ${idea.memos}\nKeywords: ${idea.keywords.joinToString(", ")}\nTodos: ${idea.todos.joinToString(", ") { it.joinToString(" - ") }}"
-                    // Toast로 메시지 출력
-                    Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+                // Retrofit 객체 생성
+                val retrofit = Retrofit.Builder()
+                    .baseUrl("http://your-api-base-url/") // API의 기본 URL 설정
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+
+                // ApiService 인터페이스의 구현체 생성
+                val apiService = retrofit.create(ApiService::class.java)
+
+                // CoroutineScope 내에서 비동기로 HTTP 요청을 수행
+                CoroutineScope(Dispatchers.IO).launch {
+                    try {
+                        // Retrofit을 사용하여 API에서 데이터 가져오기
+                        val ideas = apiService.getIdeas()
+
+                        // UI 스레드에서 Toast를 표시
+                        withContext(Dispatchers.Main) {
+                            // ideas가 null이 아닌 경우에만 실행
+                            ideas?.forEach { idea ->
+                                // 읽어들인 JSON 데이터 활용하여 메시지 생성
+                                val message = "Memos: ${idea.memos}\nKeywords: ${idea.keywords.joinToString(", ")}\nTodos: ${idea.todos.joinToString(", ") { it.joinToString(" - ") }}"
+                                // Toast로 메시지 출력
+                                Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    } catch (e: Exception) {
+                        // 오류 처리
+                        e.printStackTrace()
+                    }
                 }
             }
         })
+
     }
 }
