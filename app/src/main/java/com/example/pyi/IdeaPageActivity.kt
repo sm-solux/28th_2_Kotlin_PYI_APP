@@ -9,15 +9,20 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 //import kotlinx.coroutines.NonCancellable.message
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import okhttp3.logging.HttpLoggingInterceptor
+import java.time.LocalDateTime
+
 
 class IdeaPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,17 +46,22 @@ class IdeaPageActivity : AppCompatActivity() {
 
 
         //ReadIdeaJson.kt파일에서 정의한 readJsonFile함수를 통해 gson객체로 Json파일을 읽어들여 ideas에 저장합니다.
-        val ideas = readJsonFile(this, "Test.json")
+        //val ideas = readJsonFile(this, "Test.json")
 
+        //-----------------------------------------------------------------------------------
         //json읽기 테스트 버튼을 찾습니다.
         val testButton: Button = findViewById(R.id.button2)
 
         testButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
                 // Retrofit 객체 생성
+                val gson = GsonBuilder()
+                    .registerTypeAdapter(LocalDateTime::class.java, LocalDateTimeDeserializer())
+                    .create()
+
                 val retrofit = Retrofit.Builder()
-                    .baseUrl("http://your-api-base-url/") // API의 기본 URL 설정
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .baseUrl("http://192.168.1.34:8080/")
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .build()
 
                 // ApiService 인터페이스의 구현체 생성
@@ -60,19 +70,25 @@ class IdeaPageActivity : AppCompatActivity() {
                 // CoroutineScope 내에서 비동기로 HTTP 요청을 수행
                 CoroutineScope(Dispatchers.IO).launch {
                     try {
-                        // Retrofit을 사용하여 API에서 데이터 가져오기
-                        val ideas = apiService.getIdeas()
+                        // Get the list of ideas from the API
+                        val idea: Idea2? = apiService.getIdeas()
 
                         // UI 스레드에서 Toast를 표시
                         withContext(Dispatchers.Main) {
-                            // ideas가 null이 아닌 경우에만 실행
-                            ideas?.forEach { idea ->
+                            // idea가 null이 아닌 경우에만 실행
+                            idea?.let {
                                 // 읽어들인 JSON 데이터 활용하여 메시지 생성
-                                val message = "Memos: ${idea.memos}\nKeywords: ${idea.keywords.joinToString(", ")}\nTodos: ${idea.todos.joinToString(", ") { it.joinToString(" - ") }}"
+                                val message = "사용자id: ${it.organizeUuid}\n" +
+                                        "메모id: ${it.memoUuid}\n" +
+                                        "할일 제목: ${it.organizeTitle}\n" +
+                                        "할일 내용: ${it.organizeDetails}\n" +
+                                        "작성 시간: ${it.organizeCreated}"
+
                                 // Toast로 메시지 출력
                                 Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
                             }
                         }
+
                     } catch (e: Exception) {
                         // 오류 처리
                         e.printStackTrace()
@@ -80,6 +96,7 @@ class IdeaPageActivity : AppCompatActivity() {
                 }
             }
         })
+        //---------------------------------------------------------------------------------------
 
     }
 }
