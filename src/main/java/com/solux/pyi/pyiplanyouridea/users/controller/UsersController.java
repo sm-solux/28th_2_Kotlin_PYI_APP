@@ -99,8 +99,7 @@ public class UsersController {
     }
 
     // 로그인
-    //@PostMapping("/login")
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequestDto loginRequestDto) {
 
         String userId = loginRequestDto.getUserId();
