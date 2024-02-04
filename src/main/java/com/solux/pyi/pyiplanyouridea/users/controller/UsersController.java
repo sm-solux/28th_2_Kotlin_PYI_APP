@@ -1,10 +1,7 @@
 package com.solux.pyi.pyiplanyouridea.users.controller;
 
 import com.solux.pyi.pyiplanyouridea.users.domain.Users;
-import com.solux.pyi.pyiplanyouridea.users.dto.FindUserIdRequestDto;
-import com.solux.pyi.pyiplanyouridea.users.dto.JoinRequestDto;
-import com.solux.pyi.pyiplanyouridea.users.dto.LoginRequestDto;
-import com.solux.pyi.pyiplanyouridea.users.dto.PasswordResetRequestDto;
+import com.solux.pyi.pyiplanyouridea.users.dto.*;
 import com.solux.pyi.pyiplanyouridea.users.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -99,23 +96,35 @@ public class UsersController {
     }
 
     // 로그인
+//    @PostMapping("/login")
+//    public ResponseEntity<String> login(@RequestBody LoginRequestDto loginRequestDto) {
+//
+//        String userId = loginRequestDto.getUserId();
+//        String password = loginRequestDto.getPassword();
+//
+//        if (userId == null || password == null || userId.isEmpty() || password.isEmpty()) {
+//            return ResponseEntity.badRequest().body("아이디와 비밀번호를 입력하세요.");
+//        }
+//
+//        Users user = usersService.login(loginRequestDto);
+//
+//        if (user != null) {
+//            return ResponseEntity.ok("로그인에 성공하였습니다.");
+//        } else {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인에 실패하였습니다. 아이디 또는 비밀번호를 확인하세요.");
+//        }
+//    }
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequestDto loginRequestDto) {
+    public LoginResponseDto login(@RequestBody LoginRequestDto loginRequestDto) {
 
         String userId = loginRequestDto.getUserId();
         String password = loginRequestDto.getPassword();
 
         if (userId == null || password == null || userId.isEmpty() || password.isEmpty()) {
-            return ResponseEntity.badRequest().body("아이디와 비밀번호를 입력하세요.");
+            return null;
         }
 
-        Users user = usersService.login(loginRequestDto);
-
-        if (user != null) {
-            return ResponseEntity.ok("로그인에 성공하였습니다.");
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인에 실패하였습니다. 아이디 또는 비밀번호를 확인하세요.");
-        }
+        return usersService.login(loginRequestDto);
     }
 
     // 로그아웃

@@ -4,6 +4,7 @@ import com.solux.pyi.pyiplanyouridea.users.domain.Users;
 import com.solux.pyi.pyiplanyouridea.users.domain.UsersRole;
 import com.solux.pyi.pyiplanyouridea.users.dto.JoinRequestDto;
 import com.solux.pyi.pyiplanyouridea.users.dto.LoginRequestDto;
+import com.solux.pyi.pyiplanyouridea.users.dto.LoginResponseDto;
 import com.solux.pyi.pyiplanyouridea.users.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -64,7 +65,19 @@ public class UsersService implements UserDetailsService {
 
     // 로그인
     @Transactional
-    public Users login(LoginRequestDto loginRequestDto) {
+//    public Users login(LoginRequestDto loginRequestDto) {
+//        Users users = usersRepository.findByUserId(loginRequestDto.getUserId())
+//                .orElse(null);
+//
+//        // userId 존재X or password 일치X
+//        if (users == null || !encoder.matches(loginRequestDto.getPassword(), users.getPassword())) {
+//            return null;
+//        }
+//
+//        // userId와 password가 일치할 경우
+//        return users;
+//    }
+    public LoginResponseDto login(LoginRequestDto loginRequestDto) {
         Users users = usersRepository.findByUserId(loginRequestDto.getUserId())
                 .orElse(null);
 
@@ -74,7 +87,7 @@ public class UsersService implements UserDetailsService {
         }
 
         // userId와 password가 일치할 경우
-        return users;
+        return new LoginResponseDto(users);
     }
 
     // 인증, 인가 - userUuid
