@@ -42,11 +42,16 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, MainNextActivity::class.java)
             startActivity(intent)
         }
-        val memoAdapter = MyAdapter2 {
-            // 폴더 버튼 클릭 처리, 예를 들어 다른 페이지로 이동
-            val intent = Intent(this, MainNextActivity::class.java)
+        val memoAdapter = MyAdapter2 { memoTitle, memoDetails, position, memoCreated ->
+            // 퀵메모 리스트 클릭 처리, 예를 들어 다른 페이지로 이동
+            val intent = Intent(this, QuickMemoActivity::class.java)
+            intent.putExtra("memoTitle", memoTitle)
+            intent.putExtra("memoDetails", memoDetails)
+            intent.putExtra("memoUUid", position)
+            intent.putExtra("memoCreated", memoCreated)
             startActivity(intent)
         }
+
 
 
 
@@ -125,9 +130,11 @@ class MainActivity : AppCompatActivity() {
                     //folderAdapter.setData(folderNames)
                     val quickMemos = response.body()
                     val memoTitles: List<String> = quickMemos?.map { it.memoTitle } ?: emptyList()
+                    val memoDetails: List<String> = quickMemos?.map { it.memoDetails } ?: emptyList()
+                    val memoCreated: List<String> = quickMemos?.map { it.memoCreated } ?: emptyList()
 
                     // 어댑터에 메모 데이터 전달
-                    memoAdapter.setData(memoTitles)
+                    memoAdapter.setData(memoTitles, memoDetails, memoCreated)
 
                 } else {
                     // 실패한 경우
@@ -153,7 +160,7 @@ class MainActivity : AppCompatActivity() {
         binding.memoRecyclerview.adapter = memoAdapter
 
 
-        }
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (toggle.onOptionsItemSelected(item)){
@@ -169,6 +176,3 @@ class MainActivity : AppCompatActivity() {
 
 
 }
-
-
-

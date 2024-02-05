@@ -94,20 +94,20 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="초안: 11월 19일에 작성된 메모"
+                    android:text="초안: "
                     android:textSize="15dp"/>
                 <TextView
+                    android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="지식재산권 숏폼 아이디어 공모전"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textSize="15dp"/> <!-- 이 부분에서 텍스트 색상을 지정할 수 있습니다 -->
+                    android:textSize="20dp"/> <!-- 이 부분에서 텍스트 색상을 지정할 수 있습니다 -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="지식재산권, 저작권, 특허권, 실용신안권...
-                        사례정리, 핵심용어 정의 찾기, 영상 콘티 및 대본"
+                    android:text="앞선 페이지의 메모입니다. 돌아가려면 뒤로가기를 누르세요."
                     android:textColor="@color/black"
                     android:textSize="15dp"/>
             </LinearLayout>
@@ -131,9 +131,10 @@
                     android:padding="10dp">
 
                     <TextView
+                        android:id="@+id/organize1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="자료 1: 영상 콘티 및 아이디어 모음"
+                        android:text="자료를 추가해 보세요."
                         android:textColor="@color/black"
                         android:textSize="15dp"
                         android:textStyle="bold" /> <!-- 이 부분에서 텍스트 색상을 지정할 수 있습니다 -->
@@ -164,9 +165,10 @@
                         android:padding="10dp">
 
                         <TextView
+                            android:id="@+id/organize2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="자료 2: 영상 콘티 및 아이디어 모음"
+                            android:text="자료를 추가해 보세요."
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" /> <!-- 이 부분에서 텍스트 색상을 지정할 수 있습니다 -->
@@ -198,6 +200,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/reviewdate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="11월 6일 ~ 11월 26일"
@@ -205,6 +208,7 @@
                         android:textSize="15dp"/>
 
                     <TextView
+                        android:id="@+id/reviewtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="지식재산권 숏폼 아이디어 공모전"
@@ -213,6 +217,7 @@
                         android:textSize="15dp"/> <!-- 이 부분에서 텍스트 색상을 지정할 수 있습니다 -->
 
                     <TextView
+                        android:id="@+id/reviewdetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="최종결과물에 대한 설명..."
@@ -247,12 +252,7 @@
                     android:padding="10dp"
                     />
 
-                <!--json파일 읽어오기 테스트를 위한 버튼-->
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:text="JSON Test Button" />
+
             </LinearLayout>
 
 

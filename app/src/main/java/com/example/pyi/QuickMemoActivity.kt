@@ -4,6 +4,8 @@ package com.example.pyi
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.util.Log
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
@@ -12,12 +14,39 @@ class QuickMemoActivity : AppCompatActivity() {
 
     private lateinit var contentEditText: EditText
     private lateinit var editButton: ImageButton
+    private lateinit var textViewMemoTitle: EditText
+    private lateinit var textViewMemoDetail: EditText
 
     private var isEditingMode = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quickmemo)
+
+        // 메모 타이틀을 받아오는 코드
+        val memoTitle = intent.getStringExtra("memoTitle")
+        val memoDetails = intent.getStringExtra("memoDetails")
+        var memoUuid = intent.getIntExtra("memoUUid",0)
+
+        memoUuid = memoUuid + 1
+
+        textViewMemoTitle = findViewById(R.id.titleEditText)
+        textViewMemoDetail = findViewById(R.id.contentEditText)
+
+
+        // 메모 타이틀이 null이 아닌 경우에만 화면에 표시
+        if (memoTitle != null) {
+            // memoTitle이 Nullable일 경우에 대비하여 null 체크 후 변환
+            textViewMemoTitle.text = memoTitle?.toString()?.toEditable()
+            textViewMemoDetail.text = memoDetails?.toString()?.toEditable()
+            Log.d("memoUuid", memoUuid.toString())
+        } else {
+            Log.d("QuickMemoActivity", "No Memo Title Received")
+            Log.d("QuickMemoActivity", "No Memo Details Received")
+        }
+
+
+
 
         contentEditText = findViewById(R.id.contentEditText)
         val deleteButton: ImageButton = findViewById(R.id.deleteButton)
@@ -46,14 +75,20 @@ class QuickMemoActivity : AppCompatActivity() {
             contentEditText.isEnabled = isEditingMode
         }
 
+        //퍼즐버튼 눌렀을때
         puzzleButton.setOnClickListener {
             val intent = Intent(this, IdeaPageActivity::class.java)
+            intent.putExtra("memoUUid", memoUuid)
             startActivity(intent)
         }
     }
+
 
     override fun onBackPressed() {
         // 뒤로가기 버튼이 눌렸을 때 실행되는 메서드
         super.onBackPressed()
     }
+
+    fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)
+
 }

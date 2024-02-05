@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pyi.databinding.ActivityMainBinding
@@ -42,6 +43,7 @@ class MyAdapter(private val onItemClick: () -> Unit) : RecyclerView.Adapter<Recy
         // 버튼에 대한 클릭 리스너 설정
         binding?.folderbutton?.setOnClickListener {
             onItemClick.invoke()
+
         }
     }
 
@@ -51,13 +53,18 @@ class MyAdapter(private val onItemClick: () -> Unit) : RecyclerView.Adapter<Recy
 // MyAdapter2.kt
 class MemoViewHolder(val binding: ItemMemoBinding) : RecyclerView.ViewHolder(binding.root)
 
-class MyAdapter2(private val onItemClick: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MyAdapter2(private val onItemClick: (String, String, Int, String) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
 
     private var memoList: List<String> = emptyList()
+    private var memoDetails: List<String> = emptyList()
+    private var memoCreated: List<String> = emptyList()
 
     // 데이터 갱신을 위한 메소드 추가
-    fun setData(newMemoList: List<String>) {
-        memoList = newMemoList
+    fun setData(newMemoTitles: List<String>, newMemoDetails: List<String>, newMemoCreated: List<String>) {
+        memoList = newMemoTitles
+        memoDetails = newMemoDetails
+        memoCreated = newMemoCreated
         notifyDataSetChanged()
     }
 
@@ -70,12 +77,39 @@ class MyAdapter2(private val onItemClick: () -> Unit) : RecyclerView.Adapter<Rec
 
         // 메모 아이템 UI 설정
         binding?.writeBtn?.text = memoList[position]
+        val memoDetails = memoDetails[position]
+
+        // 최대 20글자까지만 표시
+        val truncatedText = if (memoDetails.length > 50) {
+            memoDetails.substring(0, 50) + "..."
+        } else {
+            memoDetails
+        }
+
+        binding?.name?.text = truncatedText
+
+        val memoCreatedDate = memoCreated[position]
+
+        // 최대 20글자까지만 표시
+        val truncatedText2 = if (memoDetails.length > 10) {
+            memoCreatedDate.substring(0, 10) + "에 작성됨"
+        } else {
+            memoCreatedDate
+        }
+        binding?.date?.text = truncatedText2
+
 
         // 버튼에 대한 클릭 리스너 설정
         binding?.writeBtn?.setOnClickListener {
-            onItemClick.invoke()
+            onItemClick.invoke(memoList[position], memoDetails, position, memoCreated[position])
+            val intent = Intent(binding.root.context, QuickMemoActivity::class.java)
+            intent.putExtra("memoContent", memoDetails)
+            //binding.root.context.startActivity(intent)
         }
     }
+
+
+
 
     override fun getItemCount(): Int = memoList.size
 }

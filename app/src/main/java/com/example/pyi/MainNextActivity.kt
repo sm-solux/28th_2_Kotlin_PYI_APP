@@ -47,10 +47,11 @@ class MainNextActivity : AppCompatActivity() {
         layoutManager2.stackFromEnd = true
         /* binding.memoRecyclerview.layoutManager = layoutManager2
  */
-        val memoAdapter = MyAdapter2 {
+        val memoAdapter = MyAdapter2 { memoTitle, memoDetails, position, memoCreated ->
             // 메모 버튼 클릭 처리, 예를 들어 다른 페이지로 이동
-            navigateToOtherActivity()
+            navigateToOtherActivity(memoTitle, memoDetails, position)
         }
+
 
         /* binding.memoRecyclerview.adapter = memoAdapter*/
 
@@ -70,10 +71,14 @@ class MainNextActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun navigateToOtherActivity() {
+    fun navigateToOtherActivity(memoTitle: String, memoDetails: String, position: Int) {
         val intent = Intent(this, QuickMemoActivity::class.java)
+        intent.putExtra("memoTitle", memoTitle)
+        intent.putExtra("memoDetails", memoDetails)
+        intent.putExtra("memoUuid", position)
         startActivity(intent)
     }
+
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

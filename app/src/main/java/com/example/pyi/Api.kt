@@ -30,8 +30,12 @@ interface Api {
     @GET("/viewfolderquickmemolist/{folderUuid}")
     fun getmemoInfo(@Path("folderUuid") folderUuid: Long): Call<List<ApiService.QuickMemo>>
 
+    @GET("summary/{memoUuid}")
+    fun getSummaryInfo(@Path("memoUuid") memoUuid: Int): Call<ApiService.MemoDetails>
+
+
     companion object {
-        private const val BASE_URL = "http://10.101.58.15:8080/"
+        private const val BASE_URL = "http://192.168.45.31:8080/"
         val gson : Gson =   GsonBuilder().setLenient().create();
 
         fun create() : Api{

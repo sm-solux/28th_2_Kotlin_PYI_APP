@@ -14,7 +14,7 @@ import java.time.LocalDateTime
 interface ApiService {
     companion object {
         //자꾸 바뀌는데??
-        const val BASE_URL = "http://10.101.58.15:8080/"
+        const val BASE_URL = "http://192.168.45.31:8080/"
     }
 
 
@@ -93,6 +93,78 @@ interface ApiService {
         val memoCreated: String
     )
 
+    //puzzlebutton
+    data class MemoDetails(
+        @SerializedName("memoUuid")
+        val memoUuid: Int,
+
+        @SerializedName("memoTitle")
+        val memoTitle: String,
+
+        val keywords: List<Keyword>,
+        val todos: List<Todo>,
+        val organize: List<Organize>,
+        val review: List<Review>,
+        val star: List<Star>
+    )
+
+    data class Keyword(
+        @SerializedName("keywordUuid")
+        val keywordUuid: Int,
+
+        @SerializedName("keywordDetails")
+        val keywordDetails: String,
+
+        @SerializedName("keywordCreated")
+        val keywordCreated: String
+    )
+
+    data class Todo(
+        @SerializedName("todoUuid")
+        val todoUuid: Int,
+
+        @SerializedName("todoDate")
+        val todoDate: String,
+
+        @SerializedName("todoDetails")
+        val todoDetails: String
+    )
+
+    data class Organize(
+        @SerializedName("organizeUuid")
+        val organizeUuid: Int,
+
+        @SerializedName("organizeTitle")
+        val organizeTitle: String,
+
+        @SerializedName("organizeDetails")
+        val organizeDetails: String,
+
+        @SerializedName("organizeCreated")
+        val organizeCreated: String
+    )
+
+    data class Review(
+        @SerializedName("reviewUuid")
+        val reviewUuid: Int,
+
+        @SerializedName("reviewTitle")
+        val reviewTitle: String,
+
+        @SerializedName("reviewDetails")
+        val reviewDetails: String,
+
+        @SerializedName("reviewCreated")
+        val reviewCreated: String
+    )
+
+    data class Star(
+        @SerializedName("starUuid")
+        val starUuid: Int,
+
+        @SerializedName("starDetails")
+        val starDetails: Double
+    )
 
 
 //-------------------------------------------------------------------------------------//

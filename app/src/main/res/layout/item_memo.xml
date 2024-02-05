@@ -21,17 +21,20 @@
 
     <Button
         android:id="@+id/write_btn"
-        android:layout_width="115dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#E2E2E2"
+        android:background="@android:color/transparent"
         android:text="글제목"
+        android:textSize="20dp"
         android:textStyle="bold" />
 
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="주기능 - 공부기록훃(계획 체크 후 퍼션페이지로....)"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:text="주기능 - 공부기록용(계획 체크 후 퍼션페이지로....)"
         android:layout_marginTop="5dp"/>
 </LinearLayout>

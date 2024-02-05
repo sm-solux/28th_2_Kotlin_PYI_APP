@@ -19,6 +19,9 @@ import android.widget.ImageButton
 import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.text.SimpleDateFormat
@@ -46,6 +49,53 @@ class IdeaFleshOutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ideafleshout)
+
+        //쿼리를 위한 메모아이디 불러온다
+        var memoUuid = intent.getIntExtra("memoUUid",0)
+
+        // userUuid를 사용하기 전에 null 체크를 수행하거나, 기본값을 지정할 수 있습니다.
+        if (memoUuid != 0) {
+            Log.d("UserUuid", memoUuid.toString())
+            // userUuid를 사용하여 필요한 작업 수행
+            val api = Api.create()
+
+            // Retrofit을 사용하여 유저 정보 가져오기
+            api.getSummaryInfo(memoUuid).enqueue(object :
+                Callback<ApiService.MemoDetails> {
+                override fun onResponse(
+                    call: Call<ApiService.MemoDetails>,
+                    response: Response<ApiService.MemoDetails>
+                ) {
+                    if (response.isSuccessful) {
+                        val summarys = response.body()
+
+                        summarys?.let { // summarys가 null이 아닌 경우에만 실행
+                            // MemoDetails에서 memoUuid 추출
+                            val memoUuid: Int = it.memoUuid
+
+
+
+
+                        }
+
+                    } else {
+                        // 실패한 경우
+                        Log.d("통신 실패", "응답 코드: ${response.code()}")
+                        Log.d("통신 실패", "응답 바디: ${response.errorBody()?.string()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<ApiService.MemoDetails>, t: Throwable) {
+                    // 통신 실패 시의 처리
+                    Log.d("통신 실패", "onFailure: ${t.message}")
+                }
+            })
+
+        } else {
+            // userUuid가 null일 때의 처리
+            Log.d("UserUuid", "값이 없습니다.")
+        }
+
 
         // 딥링크 데이터를 처리하는 부분
         handleDeepLinkData(intent)
