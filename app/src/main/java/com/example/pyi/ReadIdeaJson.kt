@@ -34,4 +34,3 @@ class LocalDateTimeDeserializer : JsonDeserializer<LocalDateTime> {
         return LocalDateTime.parse(dateString, formatter)
     }
 }
-

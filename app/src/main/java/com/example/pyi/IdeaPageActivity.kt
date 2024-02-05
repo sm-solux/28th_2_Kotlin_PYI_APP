@@ -2,6 +2,7 @@
 //아이디어 구체화 전단계 페이지
 package com.example.pyi
 
+import APIClient
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -25,6 +26,7 @@ import java.time.LocalDateTime
 
 
 class IdeaPageActivity : AppCompatActivity() {
+    private val apiClient = APIClient(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ideapage)
@@ -41,7 +43,8 @@ class IdeaPageActivity : AppCompatActivity() {
 
                 // 현재 액티비티에서 토스트 메시지 표시
                 Toast.makeText(applicationContext, "다른 페이지로 이동합니다!", Toast.LENGTH_SHORT).show()
-            }
+            }//$2a$10$XGoHIn3Sd9kaSKYLVkuUoOB6Wkt6X48h24b0vWH1Gaankw30lUgWW
+             //$2a$10$XGoHIn3Sd9kaSKYLVkuUoOB6Wkt6X48h24b0vWH1Gaankw30lUgWW
         })
 
 
@@ -54,24 +57,11 @@ class IdeaPageActivity : AppCompatActivity() {
 
         testButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
-                // Retrofit 객체 생성
-                val gson = GsonBuilder()
-                    .registerTypeAdapter(LocalDateTime::class.java, LocalDateTimeDeserializer())
-                    .create()
-
-                val retrofit = Retrofit.Builder()
-                    .baseUrl("http://192.168.1.34:8080/")
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-                    .build()
-
-                // ApiService 인터페이스의 구현체 생성
-                val apiService = retrofit.create(ApiService::class.java)
-
                 // CoroutineScope 내에서 비동기로 HTTP 요청을 수행
                 CoroutineScope(Dispatchers.IO).launch {
                     try {
                         // Get the list of ideas from the API
-                        val idea: Idea2? = apiService.getIdeas()
+                        val idea: Idea2? = apiClient.getIdeas()
 
                         // UI 스레드에서 Toast를 표시
                         withContext(Dispatchers.Main) {
