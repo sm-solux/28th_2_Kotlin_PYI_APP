@@ -24,14 +24,13 @@ interface Api {
 
     // 메인 페이지에서 전체 폴더 리스트 퀵메모 리스트 조회
     @GET("/mainpage/{userUuid}")
-    fun getfolderInfo(@Path("userUuid") userUuid: Long): Call<ApiService.folderInfoResponse>
+    fun getfolderInfo(@Path("userUuid") userUuid: Long): Call<List<ApiService.folderInfoResponse>>
 
     companion object {
-        private const val BASE_URL = "http://192.168.45.208:8080/"
+        private const val BASE_URL = "http://10.101.58.15:8080/"
         val gson : Gson =   GsonBuilder().setLenient().create();
 
         fun create() : Api{
-
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 //.client(client)

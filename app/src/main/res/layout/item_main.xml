@@ -14,19 +14,18 @@
         android:layout_height="44dp"
         android:src="@drawable/foldermain" />
 
-    <EditText
-        android:id="@+id/item_data"
-        android:layout_width="45dp"
-        android:layout_height="20dp"
-        android:layout_margin="0dp"
-        android:layout_weight="1"
-        android:textSize="18dp"
-        android:textStyle="bold" />
-    <Button
+    <TextView
         android:id="@+id/folderbutton"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:onClick="onFolderButtonClick"/>
-
-
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Your Text Here"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="1dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:onClick="onFolderButtonClick" />
 </LinearLayout>

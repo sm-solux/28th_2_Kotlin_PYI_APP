@@ -37,6 +37,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setContentView(binding.root)
 
+        val folderAdapter = MyAdapter {
+            // 폴더 버튼 클릭 처리, 예를 들어 다른 페이지로 이동
+            val intent = Intent(this, MainNextActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.folderRecyclerview.adapter = folderAdapter
+
         // Intent로 전달된 데이터 확인
         //userUuid로 회원 아이디
         val userUuid = intent.getLongExtra("userUuid",-1L)
@@ -47,29 +55,28 @@ class MainActivity : AppCompatActivity() {
             val api = Api.create()
 
             // Retrofit을 사용하여 유저 정보 가져오기
-            api.getfolderInfo(userUuid).enqueue(object : Callback<ApiService.folderInfoResponse> {
+            api.getfolderInfo(userUuid).enqueue(object : Callback<List<ApiService.folderInfoResponse>> {
                 override fun onResponse(
-                    call: Call<ApiService.folderInfoResponse>,
-                    response: Response<ApiService.folderInfoResponse>
+                    call: Call<List<ApiService.folderInfoResponse>>,
+                    response: Response<List<ApiService.folderInfoResponse>>
                 ) {
                     if (response.isSuccessful) {
                         val folderInfoResponse = response.body()
-                        if (folderInfoResponse != null && folderInfoResponse.folders.isNotEmpty()) {
-                            val firstFolder = folderInfoResponse.folders[0]
-                            // 첫 번째 폴더에 대한 처리
-                            Log.d("통신 성공", "첫 번째 폴더 이름: ${firstFolder.folderName}")
-                        } else {
-                            // 유효한 폴더 정보가 없는 경우의 처리
-                            Log.d("통신 실패", "폴더 정보가 없습니다.")
-                        }
+                        val folderNames: List<String> = response.body()?.flatMap { it.folders }?.map { it.folderName } ?: emptyList()
+                        Log.d("통신 성공", response.body().toString())
+                        Log.d("폴더명", folderNames.toString())
+                        // 어댑터에 데이터 전달
+                        folderAdapter.setData(folderNames)
+
                     } else {
                         // 실패한 경우
                         Log.d("응답 코드", response.code().toString())
                         Log.d("통신 실패", "응답 바디: ${response.errorBody()?.string()}")
+
                     }
                 }
 
-                override fun onFailure(call: Call<ApiService.folderInfoResponse>, t: Throwable) {
+                override fun onFailure(call: Call<List<ApiService.folderInfoResponse>>, t: Throwable) {
                     // 통신 실패 시의 처리
                     Log.d("통신 실패", "onFailure: ${t.message}")
                 }
@@ -93,13 +100,7 @@ class MainActivity : AppCompatActivity() {
         binding.folderRecyclerview.layoutManager = layoutManeger
 
 
-        val folderAdapter = MyAdapter {
-            // 폴더 버튼 클릭 처리, 예를 들어 다른 페이지로 이동
-            val intent = Intent(this, MainNextActivity::class.java)
-            startActivity(intent)
-        }
 
-        binding.folderRecyclerview.adapter = folderAdapter
 
         val layoutManeger2 = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         layoutManeger.stackFromEnd = true

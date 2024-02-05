@@ -16,9 +16,18 @@ import com.example.pyi.databinding.ActivityRecyclerViewBinding
 import com.example.pyi.databinding.ItemMainBinding
 import com.example.pyi.databinding.ItemMemoBinding
 
+// MyAdapter.kt
 class FolderViewHolder(val binding: ItemMainBinding) : RecyclerView.ViewHolder(binding.root)
 
 class MyAdapter(private val onItemClick: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private var folderNames: List<String> = emptyList()
+
+    // 데이터 갱신을 위한 메소드 추가
+    fun setData(newFolderNames: List<String>) {
+        folderNames = newFolderNames
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return FolderViewHolder(ItemMainBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -28,16 +37,17 @@ class MyAdapter(private val onItemClick: () -> Unit) : RecyclerView.Adapter<Recy
         val binding = (holder as? FolderViewHolder)?.binding
 
         // 폴더 아이템 UI 설정
+        binding?.folderbutton?.text = folderNames[position]
+
         // 버튼에 대한 클릭 리스너 설정
         binding?.folderbutton?.setOnClickListener {
             onItemClick.invoke()
         }
     }
 
-    override fun getItemCount(): Int = Int.MAX_VALUE / 2
+    override fun getItemCount(): Int = folderNames.size
 }
-
-
+// MyAdapter2.kt
 class MemoViewHolder(val binding: ItemMemoBinding) : RecyclerView.ViewHolder(binding.root)
 
 class MyAdapter2(private val onItemClick: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

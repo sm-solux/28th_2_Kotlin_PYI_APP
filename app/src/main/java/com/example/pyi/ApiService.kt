@@ -14,7 +14,7 @@ import java.time.LocalDateTime
 interface ApiService {
     companion object {
         //자꾸 바뀌는데??
-        const val BASE_URL = "http://192.168.45.208:8080/"
+        const val BASE_URL = "http://10.101.58.15:8080/"
     }
 
 
@@ -37,14 +37,17 @@ interface ApiService {
         val userUuid : String //백에 요청해서 넣어달라 하기!!
     )
 
-    data class folderInfoResponse(
-        val folders: List<Folder>,
-    )
 
-    data class Folder(
+
+    data class folderInfoResponse(
         @SerializedName("userUuid")
         val userUuid: Long,
 
+        @SerializedName("folders")
+        val folders: List<Folder>
+    )
+
+    data class Folder(
         @SerializedName("folderUuid")
         val folderUuid: Long,
 
@@ -52,8 +55,13 @@ interface ApiService {
         val folderName: String,
 
         @SerializedName("folderCreated")
-        val folderCreated: LocalDateTime,
+        val folderCreated: String, // 날짜 형식의 문자열로 받습니다
 
+        @SerializedName("memos")
+        val memos: List<Memo>
+    )
+
+    data class Memo(
         @SerializedName("memoUuid")
         val memoUuid: Long,
 
@@ -64,8 +72,9 @@ interface ApiService {
         val memoDetails: String,
 
         @SerializedName("memoCreated")
-        val memoCreated: LocalDateTime,
+        val memoCreated: String // 날짜 형식의 문자열로 받습니다
     )
+
 
 //-------------------------------------------------------------------------------------//
 
