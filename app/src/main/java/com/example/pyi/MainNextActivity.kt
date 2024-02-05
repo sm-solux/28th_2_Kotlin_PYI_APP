@@ -10,6 +10,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pyi.databinding.ActivityMainNextBinding
+import androidx.appcompat.widget.Toolbar
+
 
 class MainNextActivity : AppCompatActivity() {
 
@@ -28,13 +30,14 @@ class MainNextActivity : AppCompatActivity() {
             }
         }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainNextBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
+
 
         toggle = ActionBarDrawerToggle(this, binding.drawer, R.string.drawer_opened, R.string.drawer_closed)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -52,11 +55,12 @@ class MainNextActivity : AppCompatActivity() {
         /* binding.memoRecyclerview.adapter = memoAdapter*/
 
         binding.addButton.setOnClickListener {
-            val intent = Intent(this, AddActivity::class.java)
+            val intent = Intent(this, QuickMemoActivity::class.java)
             requestLauncher.launch(intent)
         }
 
         datas = savedInstanceState?.getStringArrayList("datas")?.toMutableList() ?: mutableListOf()
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

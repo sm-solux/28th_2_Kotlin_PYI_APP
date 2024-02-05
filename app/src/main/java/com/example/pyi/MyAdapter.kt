@@ -48,9 +48,18 @@ class MyAdapter(private val onItemClick: () -> Unit) : RecyclerView.Adapter<Recy
     override fun getItemCount(): Int = folderNames.size
 }
 // MyAdapter2.kt
+// MyAdapter2.kt
 class MemoViewHolder(val binding: ItemMemoBinding) : RecyclerView.ViewHolder(binding.root)
 
 class MyAdapter2(private val onItemClick: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private var memoList: List<String> = emptyList()
+
+    // 데이터 갱신을 위한 메소드 추가
+    fun setData(newMemoList: List<String>) {
+        memoList = newMemoList
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return MemoViewHolder(ItemMemoBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -60,11 +69,13 @@ class MyAdapter2(private val onItemClick: () -> Unit) : RecyclerView.Adapter<Rec
         val binding = (holder as? MemoViewHolder)?.binding
 
         // 메모 아이템 UI 설정
+        binding?.writeBtn?.text = memoList[position]
+
         // 버튼에 대한 클릭 리스너 설정
         binding?.writeBtn?.setOnClickListener {
             onItemClick.invoke()
         }
     }
 
-    override fun getItemCount(): Int = Int.MAX_VALUE / 2
+    override fun getItemCount(): Int = memoList.size
 }

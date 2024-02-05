@@ -18,11 +18,10 @@
 
 
         <androidx.appcompat.widget.Toolbar
-
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="홈 > 폴더"
+            app:title="홈 > 해당폴더"
             app:titleTextColor="@color/black"/>
 
 

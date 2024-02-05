@@ -74,6 +74,25 @@ interface ApiService {
         @SerializedName("memoCreated")
         val memoCreated: String // 날짜 형식의 문자열로 받습니다
     )
+//memoInfoResponse
+
+    data class QuickMemo(
+        @SerializedName("memoUuid")
+        val memoUuid: Long,
+
+        @SerializedName("folderUuid")
+        val folderUuid: Long,
+
+        @SerializedName("memoTitle")
+        val memoTitle: String,
+
+        @SerializedName("memoDetails")
+        val memoDetails: String,
+
+        @SerializedName("memoCreated")
+        val memoCreated: String
+    )
+
 
 
 //-------------------------------------------------------------------------------------//

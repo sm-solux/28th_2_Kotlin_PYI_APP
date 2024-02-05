@@ -22,9 +22,13 @@ interface Api {
     @POST("/login")
     fun userLogin(@Body jsonParams: ApiService.UserModel): Call<ApiService.LoginBackendResponse>
 
-    // 메인 페이지에서 전체 폴더 리스트 퀵메모 리스트 조회
+    // 메인 페이지에서 전체 폴더 리스트 조회
     @GET("/mainpage/{userUuid}")
     fun getfolderInfo(@Path("userUuid") userUuid: Long): Call<List<ApiService.folderInfoResponse>>
+
+    // 메인 페이지에서 전체  퀵메모 리스트 조회
+    @GET("/viewfolderquickmemolist/{folderUuid}")
+    fun getmemoInfo(@Path("folderUuid") folderUuid: Long): Call<List<ApiService.QuickMemo>>
 
     companion object {
         private const val BASE_URL = "http://10.101.58.15:8080/"

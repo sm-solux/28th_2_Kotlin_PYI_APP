@@ -42,6 +42,13 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, MainNextActivity::class.java)
             startActivity(intent)
         }
+        val memoAdapter = MyAdapter2 {
+            // 폴더 버튼 클릭 처리, 예를 들어 다른 페이지로 이동
+            val intent = Intent(this, MainNextActivity::class.java)
+            startActivity(intent)
+        }
+
+
 
         binding.folderRecyclerview.adapter = folderAdapter
 
@@ -63,22 +70,22 @@ class MainActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val folderInfoResponse = response.body()
                         val folderNames: List<String> = response.body()?.flatMap { it.folders }?.map { it.folderName } ?: emptyList()
-                        Log.d("통신 성공", response.body().toString())
-                        Log.d("폴더명", folderNames.toString())
+                        //Log.d("통신 성공", response.body().toString())
+                        //Log.d("폴더명", folderNames.toString())
                         // 어댑터에 데이터 전달
                         folderAdapter.setData(folderNames)
 
                     } else {
                         // 실패한 경우
-                        Log.d("응답 코드", response.code().toString())
-                        Log.d("통신 실패", "응답 바디: ${response.errorBody()?.string()}")
+                        //Log.d("응답 코드", response.code().toString())
+                        //Log.d("통신 실패", "응답 바디: ${response.errorBody()?.string()}")
 
                     }
                 }
 
                 override fun onFailure(call: Call<List<ApiService.folderInfoResponse>>, t: Throwable) {
                     // 통신 실패 시의 처리
-                    Log.d("통신 실패", "onFailure: ${t.message}")
+                    //Log.d("통신 실패", "onFailure: ${t.message}")
                 }
             })
 
@@ -100,6 +107,40 @@ class MainActivity : AppCompatActivity() {
         binding.folderRecyclerview.layoutManager = layoutManeger
 
 
+        //---------------------------퀵메모 조회---------------------------//
+        val api2 = Api.create()
+        val folderUuid = 1L
+        // Retrofit을 사용하여 유저 정보 가져오기
+        api2.getmemoInfo(folderUuid).enqueue(object : Callback<List<ApiService.QuickMemo>> {
+            override fun onResponse(
+                call: Call<List<ApiService.QuickMemo>>,
+                response: Response<List<ApiService.QuickMemo>>
+            ) {
+                if (response.isSuccessful) {
+                    //val memoInfoResponse = response.body()
+                    //val folderNames: List<String> = response.body()?.flatMap { it.folders }?.map { it.folderName } ?: emptyList()
+                    Log.d("통신 성공", response.body().toString())
+                    //Log.d("폴더명", folderNames.toString())
+                    // 어댑터에 데이터 전달
+                    //folderAdapter.setData(folderNames)
+                    val quickMemos = response.body()
+                    val memoTitles: List<String> = quickMemos?.map { it.memoTitle } ?: emptyList()
+
+                    // 어댑터에 메모 데이터 전달
+                    memoAdapter.setData(memoTitles)
+
+                } else {
+                    // 실패한 경우
+                    Log.d("응답 코드", response.code().toString())
+                    Log.d("통신 실패", "응답 바디: ${response.errorBody()?.string()}")
+
+                }
+            }
+            override fun onFailure(call: Call<List<ApiService.QuickMemo>>, t: Throwable) {
+                // 통신 실패 시의 처리
+                Log.d("통신 실패", "onFailure: ${t.message}")
+            }
+        })
 
 
         val layoutManeger2 = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -107,11 +148,7 @@ class MainActivity : AppCompatActivity() {
         binding.memoRecyclerview.layoutManager = layoutManeger2
         //binding.memoRecyclerview.adapter = MyAdapter2()
 
-        val memoAdapter = MyAdapter2 {
-            // 메모 버튼 클릭 처리, 예를 들어 다른 페이지로 이동
-            val intent = Intent(this, QuickMemoActivity::class.java)
-            startActivity(intent)
-        }
+
 
         binding.memoRecyclerview.adapter = memoAdapter
 
