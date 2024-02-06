@@ -20,12 +20,13 @@ import com.example.pyi.databinding.ItemMemoBinding
 // MyAdapter.kt
 class FolderViewHolder(val binding: ItemMainBinding) : RecyclerView.ViewHolder(binding.root)
 
-class MyAdapter(private val onItemClick: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+class MyAdapter(private val onItemClick: (Long) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var folderUuids: List<Long> = emptyList()
     private var folderNames: List<String> = emptyList()
 
     // 데이터 갱신을 위한 메소드 추가
-    fun setData(newFolderNames: List<String>) {
+    fun setData(newFolderNames: List<String>, newFolderUuids: List<Long>) {
+        folderUuids = newFolderUuids
         folderNames = newFolderNames
         notifyDataSetChanged()
     }
@@ -42,11 +43,12 @@ class MyAdapter(private val onItemClick: () -> Unit) : RecyclerView.Adapter<Recy
 
         // 버튼에 대한 클릭 리스너 설정
         binding?.folderbutton?.setOnClickListener {
-            onItemClick.invoke()
+            onItemClick.invoke(folderUuids[position])
 
         }
     }
 
+    //override fun getItemCount(): Int = folderNames.size
     override fun getItemCount(): Int = folderNames.size
 }
 // MyAdapter2.kt

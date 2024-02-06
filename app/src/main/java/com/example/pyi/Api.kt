@@ -35,7 +35,7 @@ interface Api {
 
 
     companion object {
-        private const val BASE_URL = "http://192.168.45.31:8080/"
+        private const val BASE_URL = "http://172.30.1.95:8080/"
         val gson : Gson =   GsonBuilder().setLenient().create();
 
         fun create() : Api{

@@ -74,11 +74,12 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         val folderInfoResponse = response.body()
+                        val folderUuids: List<Long> = response.body()?.flatMap { it.folders }?.map { it.folderUuid } ?: emptyList()
                         val folderNames: List<String> = response.body()?.flatMap { it.folders }?.map { it.folderName } ?: emptyList()
                         //Log.d("통신 성공", response.body().toString())
                         //Log.d("폴더명", folderNames.toString())
                         // 어댑터에 데이터 전달
-                        folderAdapter.setData(folderNames)
+                        folderAdapter.setData(folderNames,folderUuids)
 
                     } else {
                         // 실패한 경우
@@ -133,6 +134,9 @@ class MainActivity : AppCompatActivity() {
                     val memoDetails: List<String> = quickMemos?.map { it.memoDetails } ?: emptyList()
                     val memoCreated: List<String> = quickMemos?.map { it.memoCreated } ?: emptyList()
 
+
+                    Log.d("메모 이름들", memoTitles.toString())
+
                     // 어댑터에 메모 데이터 전달
                     memoAdapter.setData(memoTitles, memoDetails, memoCreated)
 
@@ -169,10 +173,6 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun navigateToOtherActivity() {
-        val intent = Intent(this, QuickMemoActivity::class.java)  // OtherActivity는 이동할 대상 액티비티 클래스입니다. 클래스명을 실제 액티비티 클래스명으로 변경하세요.
-        startActivity(intent)
-    }
 
 
 }
